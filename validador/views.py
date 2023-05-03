@@ -1,6 +1,21 @@
+import xml.etree.ElementTree as ET
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.utils import encoding
+from .forms import UploadFileForm
+from . import handler
 
-# Create your views here.
 
 def index(request):
-    return render(request, 'validador/index.html')
+    if request.method == "POST":
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            xml_as_string = handler.handle_uploaded_file(request.FILES["file"])
+            file = request.FILES["file"].read().decode('utf-8')
+            return render(request, "validador/index.html", {'form': form,
+                                                            "file": xml_as_string})
+    else:
+        form = UploadFileForm()
+    return render(request, "validador/index.html", {"form": form})
+
+

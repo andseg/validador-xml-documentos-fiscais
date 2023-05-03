@@ -7,9 +7,16 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="">
-        <input type="file" id="myFile" name="filename">
-        <input type="submit">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Enviar">
     </form>
+    {% if file %}
+    <br><br><br>
+        <div>
+            <p>{{ file }}</p>
+        </div>
+    {% endif %}
 </body>
 </html>

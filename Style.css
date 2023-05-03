@@ -1,0 +1,65 @@
+body{
+
+}
+
+
+
+.button{
+    width: 300px;
+    align-items: center;
+    padding: 30px;
+    margin: auto;
+    display: block;
+    margin-top: 10%;
+    border-radius:15px;
+    background-color: #6C7AF7;
+    font-size:30px;
+    color: #FFFF;
+}
+
+h2 {
+    margin-top: 60px;
+    text-align: center;
+    opacity: 0.5;
+
+}
+
+.conteiner{
+    border-radius: 15px;
+    background: #F5F5F5;
+    height: 300px;
+    width: 1500px;
+    margin-left: 60px;
+}
+
+.icons{
+    background: #D9D9D9;
+    border-radius: 20px;
+    height: 30px;
+    text-align: right;
+    margin-top: 30px;
+}
+ 
+.Cabecalho {
+    border-radius: 15px;
+    height: 90px;
+    background: #259DF4;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.lista{
+    list-style: none;
+    display: flex;
+    margin: auto;
+   
+}
+
+.itens{
+    line-height: 3px;
+    padding-left: 40px;
+    font-size: 20px;
+    text-decoration: none;
+}

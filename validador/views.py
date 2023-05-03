@@ -11,9 +11,14 @@ def index(request):
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             xml_as_string = handler.handle_uploaded_file(request.FILES["file"])
-            file = request.FILES["file"].read().decode('utf-8')
-            return render(request, "validador/index.html", {'form': form,
-                                                            "file": xml_as_string})
+            xml = ET.fromstring(xml_as_string)
+            
+            return render(request, 
+                          "validador/index.html", 
+                          {'form': form, "file": xml_as_string})
+            
+            
+            
     else:
         form = UploadFileForm()
     return render(request, "validador/index.html", {"form": form})

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,11 +6,49 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <form action="">
-        <input type="file" id="myFile" name="filename">
-        <input type="submit">
-    </form>
+<p class="tittle"> VALIDADOR DE XMLs </p>
+<br>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <input class="envio" type="submit" value="Enviar">
+</form>
+{% if metodo == 'POST' %}
+<div class="infoEmit">
+    <div class="infoEmiteStyle">
+        <br>
+        <p> <strong> Chave de Acesso da Nota: </strong> {{ Chave_de_Acesso }} </p>
+        <p> <strong> Número da Nota:</strong> {{ Numero_da_Nota }} <strong>Série:</strong> {{ Serie }} </p>
+        <p> <strong> Emitente: </strong> {{ Emitente }} </p>
+        <p> <strong> CNPJ do Emitente: </strong> {{ CNPJ_Emitente }} </p>
+        <br>
+    </div>
+</div>
+<div class="infoDest">
+    <div class="inforDestStyle">
+        <br>
+        <p> <strong> Destinatário: </strong> {{ Destinatario }} </p>
+        <p> <strong> CNPJ do Destinatário: </strong> {{ CNPJ_Destinatario }} </p>
+        <br>
+    </div>
+</div>
+<div class="mostraXML">
+    <pre>{{ xml }}</pre>
+</div>
+<div class="produtos">
+    <br>
+    <div class="produtoStyle">
+        <p> INFO PRODUTOS </p>
+        {% for produto in produtos %}
+        <p> <strong> Nome: </strong> {{ produto.nome }} Código: {{ produto.codigo }}</p>
+        <p> <strong> Valor Unitário: </strong> R$ {{ produto.valor_unitario }} <strong> Quantidade: </strong> {{ produto.quantidade }} <strong> Valor Total: </strong> R$ {{ produto.valor_total }}</p>
+        <br>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
 </body>
 </html>

@@ -1,0 +1,35 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"a5280a35-bd46-4c88-a6a3-d5894f7e4bbe\" name=\"Changes\" comment=\"\">\r\n      <change afterPath=\"$PROJECT_DIR$/templates/static/css/style.css\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/settings/settings.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/settings/settings.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/templates/validador/index.html\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/templates/validador/index.html\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/validador/handler.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/validador/handler.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/validador/urls.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/validador/urls.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/validador/views.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/validador/views.py\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"development_local\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2P4Nyt985D9i650pZqVSn6TpUvf\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"ASKED_SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"WebServerToolWindowFactoryState\": \"false\",\r\n    \"dart.analysis.tool.window.visible\": \"false\",\r\n    \"last_opened_file_path\": \"C:/Users/Unika Sistemas/IdeaProjects/validandoXML\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"project.structure.last.edited\": \"Project\",\r\n    \"project.structure.proportion\": \"0.15\",\r\n    \"project.structure.side.proportion\": \"0.0\",\r\n    \"settings.editor.selected.configurable\": \"project.propVCSSupport.Mappings\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"a5280a35-bd46-4c88-a6a3-d5894f7e4bbe\" name=\"Changes\" comment=\"\" />\r\n      <created>1682712653454</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1682712653454</updated>\r\n      <workItem from=\"1682712690618\" duration=\"2731000\" />\r\n      <workItem from=\"1683143031860\" duration=\"316000\" />\r\n      <workItem from=\"1683143479528\" duration=\"10989000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 94e430125303a975707783667f440823074a3fd0)
++++ b/.idea/workspace.xml	(date 1683210562769)
+@@ -1,14 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="a5280a35-bd46-4c88-a6a3-d5894f7e4bbe" name="Changes" comment="">
+-      <change afterPath="$PROJECT_DIR$/templates/static/css/style.css" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/settings/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings/settings.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/templates/validador/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/validador/index.html" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/validador/handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/validador/handler.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/validador/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/validador/urls.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/validador/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/validador/views.py" afterDir="false" />
+-    </list>
++    <list default="true" id="a5280a35-bd46-4c88-a6a3-d5894f7e4bbe" name="Changes" comment="" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -56,7 +49,7 @@
+       <updated>1682712653454</updated>
+       <workItem from="1682712690618" duration="2731000" />
+       <workItem from="1683143031860" duration="316000" />
+-      <workItem from="1683143479528" duration="10989000" />
++      <workItem from="1683143479528" duration="11572000" />
+     </task>
+     <servers />
+   </component>

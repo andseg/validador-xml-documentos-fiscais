@@ -1,0 +1,66 @@
+body {
+    background: silver;
+}
+
+.tittle {
+    color: indigo;
+    text-align: center;
+    font-size: 24px;
+}
+
+.envio {
+    background: ivory;
+    border-radius: 15%;
+    width: 68px;
+}
+
+.infoEmit {
+    margin-top: 3vw;
+    background: #e8e8e8;
+    border-radius: 2vw;
+    width: 55vw;
+    height: 100%;
+}
+
+.infoEmiteStyle {
+    font-size: 14px;
+    margin-left: 2vw;
+}
+
+.infoDest {
+    margin-top: 0.5vw;
+    background: #e8e8e8;
+    border-radius: 2vw;
+    width: 55vw;
+    height: 100%;
+}
+
+.inforDestStyle {
+    font-size: 14px;
+    margin-left: 2vw;
+}
+
+.mostraXML {
+    background: #dddddd;
+    height: 20vw;
+    overflow-y: scroll;
+    overflow-x: auto;
+    width: 55vw;
+    margin-top: 2vw;
+}
+
+.produtos {
+    margin-top: -43.5vw;
+    background: #e8e8e8;
+    border-radius: 2vw;
+    width: 40vw;
+    height: 42.5vw;
+    margin-left: 57.5vw;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.produtoStyle {
+    font-size: 14px;
+    margin-left: 2vw;
+}

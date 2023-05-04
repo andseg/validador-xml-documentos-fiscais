@@ -71,3 +71,5 @@ def index(request):
     else:
         form = UploadFileForm()
     return render(request, "validador/index.html", {"form": form, "metodo": request.method})
+
+# teste

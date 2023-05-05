@@ -1,30 +1,48 @@
 import xml.etree.ElementTree as ET
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from django.utils import encoding
+from validador.rulesXML import validator_rules
 from .forms import UploadFileForm
-from . import handler
 
 
 def index(request):
     if request.method == "POST":
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            # xml_as_string = handler.handle_uploaded_file(request.FILES["file"])
-            # file = request.FILES["file"].read().decode('utf-8')
             file = ET.parse(request.FILES["file"])
             root = file.getroot()
             xml = ET.tostring(root, encoding='unicode', method='xml')
-
             nsNFE = {
                 'ns': "http://www.portalfiscal.inf.br/nfe"
             }
-            serie_nfe = root.find('ns:NFe/ns:infNFe/ns:ide/ns:serie', nsNFE)
-            numero_nfe = root.find('ns:NFe/ns:infNFe/ns:ide/ns:nNF', nsNFE)
-            emitente_nfe = root.find('ns:NFe/ns:infNFe/ns:emit/ns:xNome', nsNFE)
-            cnpj_emit_nfe = root.find('ns:NFe/ns:infNFe/ns:emit/ns:CNPJ', nsNFE)
-            cnpj_dest_nfe = root.find('ns:NFe/ns:infNFe/ns:dest/ns:CNPJ', nsNFE)
-            dest_nfe = root.find('ns:NFe/ns:infNFe/ns:dest/ns:xNome', nsNFE)
+            schema = root.find('ns:NFe/ns:infNFe/ns:ide/ns:mod', nsNFE)
+            if schema is not None:
+                caminho = 'ns:NFe/ns:infNFe/'
+            else:
+                caminho = 'ns:infNFe/'
+
+            modelo_nfe = root.find(caminho + 'ns:ide/ns:mod', nsNFE)
+
+            serie_nfe = root.find(caminho + 'ns:ide/ns:serie', nsNFE)
+            numero_nfe = root.find(caminho + 'ns:ide/ns:nNF', nsNFE)
+
+            dest_nfe = root.find(caminho + 'ns:dest/ns:xNome', nsNFE)
+            emitente_nfe = root.find(caminho + 'ns:emit/ns:xNome', nsNFE)
+
+            cnpj_emit_nfe = root.find(caminho + 'ns:emit/ns:CNPJ', nsNFE)
+            cnpj_dest_nfe = root.find(caminho + 'ns:dest/ns:CNPJ', nsNFE)
+
+            # Para fins de validação
+            emit_uf = root.find(caminho + 'ns:emit/ns:enderEmit/ns:UF', nsNFE)
+            det_uf = root.find(caminho + 'ns:dest/ns:enderDest/ns:UF', nsNFE)
+            lista_alq_produto = []
+            for det in root.findall(caminho + 'ns:det', nsNFE):
+                alq_icms_nfe = det.find('ns:imposto/ns:ICMS/ns:ICMS20/ns:pICMS', nsNFE)
+                if alq_icms_nfe is not None:
+                    lista_alq_produto.append(alq_icms_nfe.text)
+                else:
+                    alq_icms_nfe = '0'
+                    lista_alq_produto.append(alq_icms_nfe)
+
             chave_nfe = root.find('ns:NFe/ns:infNFe', nsNFE)
             chave_nfe = chave_nfe.attrib['Id'][3:]
             cnpj_emit_nfe_format = '{}.{}.{}/{}-{}'.format(cnpj_emit_nfe.text[:2], cnpj_emit_nfe.text[2:5],
@@ -36,7 +54,7 @@ def index(request):
 
             produtos = []
 
-            for det in root.findall('ns:NFe/ns:infNFe/ns:det', nsNFE):
+            for det in root.findall(caminho + 'ns:det', nsNFE):
                 nome_prod_nfe = det.find('ns:prod/ns:xProd', nsNFE)
                 item_prod_nfe = det.find('ns:prod/ns:vUnCom', nsNFE)
                 item_prod_format = round(float(item_prod_nfe.text), 2)
@@ -52,7 +70,8 @@ def index(request):
                     'valor_total': valor_prod_nfe.text,
                 }
                 produtos.append(produto)
-
+            alq_validado = validator_rules(emit_uf.text, det_uf.text, lista_alq_produto)
+            print(alq_validado)
             infor = {
                 'metodo': request.method,
                 'form': form,
@@ -64,12 +83,12 @@ def index(request):
                 'CNPJ_Destinatario': cnpj_dest_nfe_format,
                 'Chave_de_Acesso': chave_nfe,
                 'produtos': produtos,
-                'xml': xml
+                'xml': xml,
+                'modelo': modelo_nfe,
+                'alq_validado': alq_validado
             }
 
             return render(request, "validador/index.html", infor)
     else:
         form = UploadFileForm()
     return render(request, "validador/index.html", {"form": form, "metodo": request.method})
-
-# teste

@@ -7,24 +7,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'JS/main.js' %}"></script>
 </head>
 <body>
-<p class="tittle"> VALIDADOR DE XMLs </p>
-<br>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form }}
-    <input class="envio" type="submit" value="Enviar">
+<header class="tittle_XML"> 
+    <br>
+    <h2>VALIDADOR DE XMLS </h2>
+
+</header>
+<form class="conteiner_form" method="post" enctype="multipart/form-data">
+    <div>
+        {% csrf_token %}
+        <label for="id_file" class="button" id="envir_arquivo" >Selecione um arquivo XML</label>
+        <input type="file" name="file" required id="id_file">
+        <input class="button_enviar" type="submit" value="Enviar arquivo"></input>
+
+      </div>
 </form>
+<div class="conteiner_menu">
+    <nav class="nav_menu">
+        <ul>
+            <li class="li_menu"> <a href="#"> Visualizar XML</a></li>
+            <li class="li_menu"><a href="#"> Informações produto</a></li>
+            <li class="li_menu"><a href="#"> Informações Destinatario</a></li>
+        </ul>
+    </nav>
+</div>
 {% if metodo == 'POST' %}
 <div class="infoEmit">
     <div class="infoEmiteStyle">
-        <br>
-        <p> <strong> Chave de Acesso da Nota: </strong> {{ Chave_de_Acesso }} </p>
-        <p> <strong> Número da Nota:</strong> {{ Numero_da_Nota }} <strong>Série:</strong> {{ Serie }} </p>
-        <p> <strong> Emitente: </strong> {{ Emitente }} </p>
-        <p> <strong> CNPJ do Emitente: </strong> {{ CNPJ_Emitente }} </p>
-        <br>
+        <table>
+            <tr>
+              <th> <strong> Chave de Acesso da Nota </strong> </th>
+              <th>  <strong> Número da Nota</strong> </th>
+              <th> <strong> Emitente </strong> </th>
+              <th> <strong>    CNPJ do Emitente     </strong> </th>
+            </tr>
+            <tr>
+                <td>{{ Chave_de_Acesso }}  </td>
+                <td> {{ Numero_da_Nota }} </td>
+                <td> {{ Emitente }} </td>
+                <td> {{ CNPJ_Emitente }} </td>
+            </tr>
+        </table>
     </div>
 </div>
 <div class="infoDest">

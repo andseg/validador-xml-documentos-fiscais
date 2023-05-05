@@ -4,4 +4,4 @@ from django.core.validators import FileExtensionValidator as FEV
 
 
 class UploadFileForm(forms.Form):
-    file = forms.FileField(validators=[FEV(['xml'], u'Utilizar apenas extensão XML', '001')])
+    file = forms.FileField(validators=[FEV(['xml'], 'Utilizar apenas extensão XML', '001')],)

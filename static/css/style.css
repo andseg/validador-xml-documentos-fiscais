@@ -1,3 +1,138 @@
-body {
-    background: silver;
+
+
+
+
+.infoEmit {
+    margin-top: 3vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+}
+
+.infoEmiteStyle{
+    padding: 7px;
+    text-align: center;
+    margin: auto;
+    border-radius: 15px;
+    background-color:   rgb(134, 213, 247);
+
+}
+.infoEmiteStyle th{
+    background: rgb(116, 201, 237);
+}
+.infoEmiteStyle td {
+    padding-right: 15px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    text-align: center;
+    background:  rgb(167, 216, 237);
+
+}
+
+.infoDest {
+    margin-top: 0.5vw;
+    background: #e8e8e8;
+    border-radius: 2vw;
+    width: 55vw;
+    height: 100%;
+    display: none;
+}
+
+.inforDestStyle {
+    font-size: 14px;
+    margin-left: 2vw;
+}
+
+.mostraXML {
+    background: #dddddd;
+    height: 20vw;
+    overflow-y: scroll;
+    overflow-x: auto;
+    width: 55vw;
+    margin-top: 2vw;
+    display: none;
+}
+
+.produtos {
+    margin-top: -43.5vw;
+    background: #e8e8e8;
+    border-radius: 2vw;
+    width: 40vw;
+    height: 42.5vw;
+    margin-left: 57.5vw;
+    overflow-y: auto;
+    overflow-x: auto;
+    display: none;
+}
+
+.produtoStyle {
+    font-size: 14px;
+    margin-left: 2vw;
+}
+
+input[type="file" ]{
+  display: none;
+}
+
+.button {
+    background: rgb(171, 163, 233);
+    border-radius:20px ;
+    padding: 7px;
+    margin-bottom: 30px;
+}
+
+.button_enviar{
+    margin-top: 10px;
+    border-radius: 20px;
+    padding: 7px;
+    background:rgb(171, 163, 233);
+    border: #e8e8e8;
+}
+
+.conteiner_form{
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+}
+
+
+.conteiner_menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+}
+
+.nav_menu{
+    margin-top: 30px;
+    text-align: center;
+    background: rgb(111, 175, 232);
+    border-radius: 15px;
+    
+}
+
+.nav_menu ul{
+    list-style: none;
+    display: flex;
+
+}
+
+.li_menu{
+     margin-left: 10px;
+    list-style-type: none;
+    margin-right: 10px;
+    
+}
+
+.li_menu a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.tittle_XML{
+    background: rgb(111, 199, 237);
+    text-align: center;
+    padding-bottom: 20px;
+    border-radius: 30px;
+
 }

@@ -10,6 +10,7 @@ def index(request):
         if form.is_valid():
             file = ET.parse(request.FILES["file"])
             root = file.getroot()
+
             xml = ET.tostring(root, encoding='unicode', method='xml')
             nsNFE = {
                 'ns': "http://www.portalfiscal.inf.br/nfe"
@@ -19,8 +20,8 @@ def index(request):
                 caminho = 'ns:NFe/ns:infNFe/'
             else:
                 caminho = 'ns:infNFe/'
-            modelo_nfe = root.find(caminho + 'ns:ide/ns:mod', nsNFE)
 
+            modelo_nfe = root.find(caminho + 'ns:ide/ns:mod', nsNFE)
             # VALIDAÇÃO DO TIPO DE NOTA FISCAL
             if modelo_nfe.text == '55':
                 serie_nfe = root.find(caminho + 'ns:ide/ns:serie', nsNFE)
@@ -31,6 +32,10 @@ def index(request):
 
                 cnpj_emit_nfe = root.find(caminho + 'ns:emit/ns:CNPJ', nsNFE)
                 cnpj_dest_nfe = root.find(caminho + 'ns:dest/ns:CNPJ', nsNFE)
+                fisico = False
+                if cnpj_dest_nfe is None:
+                    fisico = True
+                    cnpj_dest_nfe = root.find(caminho + 'ns:dest/ns:CPF', nsNFE)
 
                 # Para fins de validação
                 emit_uf = root.find(caminho + 'ns:emit/ns:enderEmit/ns:UF', nsNFE)
@@ -44,14 +49,23 @@ def index(request):
                         alq_icms_nfe = '0'
                         lista_alq_produto.append(alq_icms_nfe)
 
-                chave_nfe = root.find('ns:NFe/ns:infNFe', nsNFE)
-                chave_nfe = chave_nfe.attrib['Id'][3:]
+                chave_nfc = root.find('ns:infNFe', nsNFE)
+                if chave_nfc is None:
+                    chave_nfc = root.find('ns:NFe/ns:infNFe', nsNFE).attrib['Id'][3:]
+                else:
+                    chave_nfc = chave_nfc.attrib['Id'][3:]
+
                 cnpj_emit_nfe_format = '{}.{}.{}/{}-{}'.format(cnpj_emit_nfe.text[:2], cnpj_emit_nfe.text[2:5],
                                                                cnpj_emit_nfe.text[5:8], cnpj_emit_nfe.text[8:12],
                                                                cnpj_emit_nfe.text[12:])
-                cnpj_dest_nfe_format = '{}.{}.{}/{}-{}'.format(cnpj_dest_nfe.text[:2], cnpj_dest_nfe.text[2:5],
-                                                               cnpj_dest_nfe.text[5:8], cnpj_dest_nfe.text[8:12],
-                                                               cnpj_dest_nfe.text[12:])
+
+                if not fisico:
+                    cnpj_dest_nfe_format = '{}.{}.{}/{}-{}'.format(cnpj_dest_nfe.text[:2], cnpj_dest_nfe.text[2:5],
+                                                                   cnpj_dest_nfe.text[5:8], cnpj_dest_nfe.text[8:12],
+                                                                   cnpj_dest_nfe.text[12:])
+                else:
+                    cnpj_dest_nfe_format = '{}.{}.{}-{}'.format(cnpj_dest_nfe.text[:3], cnpj_dest_nfe.text[3:5],
+                                                                cnpj_dest_nfe.text[5:8], cnpj_dest_nfe.text[11:])
 
                 produtos = []
 
@@ -82,10 +96,10 @@ def index(request):
                     'CNPJ_Emitente': cnpj_emit_nfe_format,
                     'Destinatario': dest_nfe.text,
                     'CNPJ_Destinatario': cnpj_dest_nfe_format,
-                    'Chave_de_Acesso': chave_nfe,
+                    'Chave_de_Acesso': chave_nfc,
                     'produtos': produtos,
                     'xml': xml,
-                    'modelo': modelo_nfe,
+                    'modelo': modelo_nfe.text,
                     'alq_validado': alq_validado
                 }
                 return render(request, "validador/index.html", infor)
@@ -109,8 +123,12 @@ def index(request):
                         alq_icms_nfc = '0'
                         lista_alq_produto_nfc.append(alq_icms_nfc)
 
-                chave_nfc = root.find('ns:NFe/ns:infNFe', nsNFE)
-                chave_nfc = chave_nfc.attrib['Id'][3:]
+                chave_nfc = root.find('ns:infNFe', nsNFE)
+                if chave_nfc is None:
+                    chave_nfc = root.find('ns:NFe/ns:infNFe', nsNFE).attrib['Id'][3:]
+                else:
+                    chave_nfc = chave_nfc.attrib['Id'][3:]
+
                 cnpj_emit_nfc_format = '{}.{}.{}/{}-{}'.format(cnpj_emit_nfc.text[:2], cnpj_emit_nfc.text[2:5],
                                                                cnpj_emit_nfc.text[5:8], cnpj_emit_nfc.text[8:12],
                                                                cnpj_emit_nfc.text[12:])
@@ -144,7 +162,7 @@ def index(request):
                     'Chave_de_Acesso': chave_nfc,
                     'produtos': produtos,
                     'xml': xml,
-                    'modelo': modelo_nfe,
+                    'modelo': modelo_nfe.text,
                     'alq_validado': alq_validado
                 }
                 return render(request, "validador/index.html", infor)

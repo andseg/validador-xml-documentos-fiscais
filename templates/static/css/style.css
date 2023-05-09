@@ -49,8 +49,9 @@ body {
     margin-top: 2vw;
 }
 
+{% if modelo == '55' %}
 .produtos {
-    margin-top: -43.5vw;
+    margin-top: -43vw;
     background: #e8e8e8;
     border-radius: 2vw;
     width: 40vw;
@@ -59,6 +60,20 @@ body {
     overflow-y: auto;
     overflow-x: auto;
 }
+{% endif %}
+
+{% if modelo == '65' %}
+.produtos {
+    margin-top: -35.5vw;
+    background: #e8e8e8;
+    border-radius: 2vw;
+    width: 40vw;
+    height: 42.5vw;
+    margin-left: 57.5vw;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+{% endif %}
 
 .produtoStyle {
     font-size: 14px;

@@ -1,10 +1,16 @@
-
-
+body{
+    background: #292E43;
+    border: solid 1px;
+    box-shadow: 0px 0px 2px 2px rgb(74, 34, 34);
+    border-radius: 6px;
+    font-family: 'Lobster', cursive;
+    font-family: 'Roboto', sans-serif;
+}
 
 
 .infoEmit {
     margin-top: 3vw;
-    display: flex;
+    display: flex;  
     justify-content: center;
     align-items: center;  
 }
@@ -14,18 +20,18 @@
     text-align: center;
     margin: auto;
     border-radius: 15px;
-    background-color:   rgb(134, 213, 247);
+    background: #292E43;
 
 }
 .infoEmiteStyle th{
-    background: rgb(116, 201, 237);
+    background: #292E43;
 }
 .infoEmiteStyle td {
     padding-right: 15px;
     padding-bottom: 10px;
     padding-left: 15px;
     text-align: center;
-    background:  rgb(167, 216, 237);
+    background: #292E43;
 
 }
 
@@ -74,30 +80,68 @@ input[type="file" ]{
   display: none;
 }
 
+/*CSS Davi*/
+
+.conteiner_Principal{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 97vh;
+    width: 90vw;
+    margin-left: 30px;
+    
+}
+
+.troca{
+    background: #292E43;
+}
+
+.tittle_XML{
+    background: #292E43;
+}
+
+.tittle_XML h1{
+    color: #fff;
+    background: #292E43;
+}
+
 .button {
-    background: rgb(171, 163, 233);
-    border-radius:20px ;
-    padding: 7px;
+    background: #292E43;
+    padding: 20px;
     margin-bottom: 30px;
+    cursor: pointer;
+    color:#fff;
+    margin-right: 15px;
+    border: solid black 1px;
+    
+}
+
+.button a {
+    text-decoration: none;
+    color: #fff;
 }
 
 .button_enviar{
-    margin-top: 10px;
-    border-radius: 20px;
-    padding: 7px;
-    background:rgb(171, 163, 233);
+    margin-top: 9px;
+    padding: 13px;
+    background: #2c3869;
     border: #e8e8e8;
+    cursor: pointer;
+    color:#fff;
+    box-shadow: 0px 0px 2px 2px rgb(0,0,0);
+    border-radius: 3px;
 }
 
-.conteiner_form{
-    display: flex;
-    flex-direction: center;
-    justify-content: center;
+.conteiner_button{
+    position:fixed;
+    left:50px;
+    bottom:50px;
+    background: #292E43;
 }
 
 
 .conteiner_menu{
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
   
@@ -129,10 +173,51 @@ input[type="file" ]{
     color: #fff;
 }
 
-.tittle_XML{
-    background: rgb(111, 199, 237);
-    text-align: center;
-    padding-bottom: 20px;
-    border-radius: 30px;
+/*menu capa inicial */
 
+.nav_bar{
+    list-style: none;
+    background: #292E43;
+    display:flex;
+
+
+}
+
+.coneteiner_nav{
+    position:fixed;
+    right:50px;
+    top:15px;
+    background: #292E43;
+}
+.nav_li{
+    background: #292E43;
+    padding: 10px;
+
+}
+.nav_li a{
+    text-decoration: none;
+    background: #292E43;
+    color: #fff;
+}
+
+/*bordas*/
+
+.borda_direita{
+    position:fixed;
+    left:50px;
+    top:50px;
+    border-top: solid rgb(88, 6, 6) 1px;
+    border-left:solid rgb(88, 6, 6) 1px ;
+    width: 150px;
+    height: 150px;
+}
+
+.borda_esquerda{
+    position:fixed;
+    right:50px;
+    bottom:50px;
+    border-bottom: solid rgb(88, 6, 6) 1px;
+    border-right:solid rgb(88, 6, 6) 1px ;
+    width: 150px;
+    height: 150px;
 }

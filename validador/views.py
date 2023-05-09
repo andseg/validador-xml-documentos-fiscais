@@ -72,4 +72,16 @@ def index(request):
         form = UploadFileForm()
     return render(request, "validador/index.html", {"form": form, "metodo": request.method})
 
-# teste
+def validadorxml(request):
+    if request.method == "POST":
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            # xml_as_string = handler.handle_uploaded_file(request.FILES["file"])
+            # file = request.FILES["file"].read().decode('utf-8')
+            file = ET.parse(request.FILES["file"])
+            root = file.getroot()
+            xml = ET.tostring(root, encoding='unicode', method='xml')
+            return render(request, "validador/validadorxml.html")
+        return render(request, "validador/validadorxml.html")
+
+    return render(request, "validador/validadorxml.html")

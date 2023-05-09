@@ -10,70 +10,29 @@
     <script src="{% static 'JS/main.js' %}"></script>
 </head>
 <body>
-<header class="tittle_XML"> 
-    <br>
-    <h2>VALIDADOR DE XMLS </h2>
+<div class="conteiner_Principal">
+    <div class="troca" id="demo">
+        <div class="tittle_XML">
+            <h1>VALIDADOR XML</h1>
+        </div>
+    </div>
+    <div class="conteiner_button">
+        <label class="button"><a href="{% url 'validadorxml' %}">Validado Fiscal</a></label>
+    </div>
+        <div class="coneteiner_nav">
+            <nav>
+                <ul class="nav_bar">
+                    <li class="nav_li"><a href="">Home</a></li>
+                    <li class="nav_li"><a href="">Document</a></li>
+                    <li class="nav_li"><a href="">Devs</a></li>
 
-</header>
-<form class="conteiner_form" method="post" enctype="multipart/form-data">
-    <div>
-        {% csrf_token %}
-        <label for="id_file" class="button" id="envir_arquivo" >Selecione um arquivo XML</label>
-        <input type="file" name="file" required id="id_file">
-        <input class="button_enviar" type="submit" value="Enviar arquivo"></input>
+                </ul>
+            </nav>
+        </div>
+ <div class="borda_esquerda"></div>
+ <div class="borda_direita"></div>       
 
-      </div>
-</form>
-<div class="conteiner_menu">
-    <nav class="nav_menu">
-        <ul>
-            <li class="li_menu"> <a href="#"> Visualizar XML</a></li>
-            <li class="li_menu"><a href="#"> Informações produto</a></li>
-            <li class="li_menu"><a href="#"> Informações Destinatario</a></li>
-        </ul>
-    </nav>
-</div>
-{% if metodo == 'POST' %}
-<div class="infoEmit">
-    <div class="infoEmiteStyle">
-        <table>
-            <tr>
-              <th> <strong> Chave de Acesso da Nota </strong> </th>
-              <th>  <strong> Número da Nota</strong> </th>
-              <th> <strong> Emitente </strong> </th>
-              <th> <strong>    CNPJ do Emitente     </strong> </th>
-            </tr>
-            <tr>
-                <td>{{ Chave_de_Acesso }}  </td>
-                <td> {{ Numero_da_Nota }} </td>
-                <td> {{ Emitente }} </td>
-                <td> {{ CNPJ_Emitente }} </td>
-            </tr>
-        </table>
-    </div>
-</div>
-<div class="infoDest">
-    <div class="inforDestStyle">
-        <br>
-        <p> <strong> Destinatário: </strong> {{ Destinatario }} </p>
-        <p> <strong> CNPJ do Destinatário: </strong> {{ CNPJ_Destinatario }} </p>
-        <br>
-    </div>
-</div>
-<div class="mostraXML">
-    <pre>{{ xml }}</pre>
-</div>
-<div class="produtos">
-    <br>
-    <div class="produtoStyle">
-        <p> INFO PRODUTOS </p>
-        {% for produto in produtos %}
-        <p> <strong> Nome: </strong> {{ produto.nome }} Código: {{ produto.codigo }}</p>
-        <p> <strong> Valor Unitário: </strong> R$ {{ produto.valor_unitario }} <strong> Quantidade: </strong> {{ produto.quantidade }} <strong> Valor Total: </strong> R$ {{ produto.valor_total }}</p>
-        <br>
-        {% endfor %}
-    </div>
-</div>
-{% endif %}
+
+
 </body>
 </html>

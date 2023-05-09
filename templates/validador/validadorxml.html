@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'JS/main.js' %}"></script>
+</head>
+<body>
+   
+    <form class="conteiner_form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="id_file" class="button" id="envir_arquivo" >Selecione um arquivo XML</label>
+        <input type="file" name="file" required id="id_file">
+        <input  class="button_enviar" type="submit" value="Enviar arquivo"></input>
+</form>
+
+
+{% if metodo == 'POST' %}
+   <div class="infoEmit">
+       <div class="infoEmiteStyle">
+           <table>
+               <tr>
+               <th> <strong> Chave de Acesso da Nota </strong> </th>
+               <th>  <strong> Número da Nota</strong> </th>
+               <th> <strong> Emitente </strong> </th>
+               <th> <strong>    CNPJ do Emitente     </strong> </th>
+               </tr>
+               <tr>
+                   <td>{{ Chave_de_Acesso }}  </td>
+                   <td> {{ Numero_da_Nota }} </td>
+                   <td> {{ Emitente }} </td>
+                   <td> {{ CNPJ_Emitente }} </td>
+               </tr>
+           </table>
+       </div>
+   </div>
+{% endif %}
+ 
+</div>
+
+<div class="conteiner_menu">
+<nav class="nav_menu">
+   <ul>
+       <li class="li_menu"> <a href="#"> Visualizar XML</a></li>
+       <li class="li_menu"><a href="#"> Informações produto</a></li>
+       <li class="li_menu"><a href="#"> Informações Destinatario</a></li>
+   </ul>
+</nav>
+</div>
+
+
+<div class="infoDest">
+<div class="inforDestStyle">
+   <br>
+   <p> <strong> Destinatário: </strong> {{ Destinatario }} </p>
+   <p> <strong> CNPJ do Destinatário: </strong> {{ CNPJ_Destinatario }} </p>
+   <br>
+</div>
+</div>
+<div class="mostraXML">
+<pre>{{ xml }}</pre>
+</div>
+<div class="produtos">
+<br>
+<div class="produtoStyle">
+   <p> INFO PRODUTOS </p>
+   {% for produto in produtos %}
+   <p> <strong> Nome: </strong> {{ produto.nome }} Código: {{ produto.codigo }}</p>
+   <p> <strong> Valor Unitário: </strong> R$ {{ produto.valor_unitario }} <strong> Quantidade: </strong> {{ produto.quantidade }} <strong> Valor Total: </strong> R$ {{ produto.valor_total }}</p>
+   <br>
+   {% endfor %}
+</div>
+</div> 
+</body>
+</html>

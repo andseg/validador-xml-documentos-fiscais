@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f16563f2-7a07-4260-a4c4-0bf4eb3a6a81" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="f16563f2-7a07-4260-a4c4-0bf4eb3a6a81" name="Changes" comment="'Testando Commit Development'">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/templates/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/validador/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/validador/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/validador/rulesXML.py" beforeDir="false" afterPath="$PROJECT_DIR$/validador/rulesXML.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/validador/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/validador/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,10 +20,13 @@
       </list>
     </option>
   </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/development_front" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="development" />
+        <entry key="$PROJECT_DIR$" value="consulta_nota" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -171,7 +170,8 @@
       <updated>1683214580285</updated>
       <workItem from="1683214581676" duration="11102000" />
       <workItem from="1683287499551" duration="25322000" />
-      <workItem from="1683562820641" duration="25917000" />
+      <workItem from="1683562820641" duration="30154000" />
+      <workItem from="1683662835474" duration="1384000" />
     </task>
     <task id="LOCAL-00001" summary="'Testando Commit Development'">
       <created>1683215227658</created>

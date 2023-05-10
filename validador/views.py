@@ -4,6 +4,10 @@ from validador.rulesXML import validator_rules, validador_rules_nfce
 from .forms import UploadFileForm
 
 
+def validadorxml(request, infor):
+    return render(request, "validador/validadorxml.html", infor)
+
+
 def index(request):
     if request.method == "POST":
         form = UploadFileForm(request.POST, request.FILES)
@@ -102,7 +106,7 @@ def index(request):
                     'modelo': modelo_nfe.text,
                     'alq_validado': alq_validado
                 }
-                return render(request, "validador/index.html", infor)
+                return validadorxml(request, infor)
 
             elif modelo_nfe.text == '65':
                 serie_nfc = root.find(caminho + 'ns:ide/ns:serie', nsNFE)
@@ -165,11 +169,7 @@ def index(request):
                     'modelo': modelo_nfe.text,
                     'alq_validado': alq_validado
                 }
-                return render(request, "validador/index.html", infor)
+                return validadorxml(request, infor)
     else:
         form = UploadFileForm()
     return render(request, "validador/index.html", {"form": form, "metodo": request.method})
-
-
-def validadorxml(request):
-    return render(request, 'validador/validadorxml.html')

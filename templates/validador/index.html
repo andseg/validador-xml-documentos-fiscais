@@ -1,38 +1,42 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <script src="{% static 'JS/main.js' %}"></script>
-</head>
-<body>
-<div class="conteiner_Principal">
-    <div class="troca" id="demo">
-        <div class="tittle_XML">
-            <h1>VALIDADOR XML</h1>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <script src="{% static 'JS/main.js' %}"></script>
+    </head>
+    <body>
+        <div class="conteiner_Principal">
+            <div class="troca" id="demo">
+                <div class="tittle_XML">
+                    <h1>VALIDADOR XML</h1>
+                </div>
+            </div>
+
+            <div class="conteiner_button">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" value="Enviar">
+                </form>
+            </div>
+
+            <div class="coneteiner_nav">
+                    <nav>
+                        <ul class="nav_bar">
+                            <li class="nav_li"><a href="">Home</a></li>
+                            <li class="nav_li"><a href="">Document</a></li>
+                            <li class="nav_li"><a href="">Devs</a></li>
+
+                        </ul>
+                    </nav>
+            </div>
+            <div class="borda_esquerda"></div>
+            <div class="borda_direita"></div>
         </div>
-    </div>
-    <div class="conteiner_button">
-        <label class="button"><a href="{% url 'validadorxml' %}">Validado Fiscal</a></label>
-    </div>
-        <div class="coneteiner_nav">
-            <nav>
-                <ul class="nav_bar">
-                    <li class="nav_li"><a href="">Home</a></li>
-                    <li class="nav_li"><a href="">Document</a></li>
-                    <li class="nav_li"><a href="">Devs</a></li>
-
-                </ul>
-            </nav>
-        </div>
- <div class="borda_esquerda"></div>
- <div class="borda_direita"></div>       
-
-
-
-</body>
+    </body>
 </html>

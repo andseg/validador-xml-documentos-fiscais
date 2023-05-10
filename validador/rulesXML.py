@@ -1,8 +1,6 @@
 import pandas as pd
 
 
-
-
 def validator_rules(origin, dest, alq_nfe):
     alq_icms = pd.read_excel("./validador/aliquotas/aliquotaICMS.xlsx", index_col=0)
     alq = alq_icms.loc[origin, dest]

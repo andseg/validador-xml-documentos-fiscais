@@ -31,3 +31,16 @@ def validador_rules_nfce(origin, alq_nfc):
         else:
             alq_validado = 'Inconsistência Encontrada não existe pICMS no arquivo'
             return alq_validado
+
+
+def rules_recebimentos(vpag, vnf):
+    valor_total = sum(vpag)
+    print(valor_total)
+    if valor_total != vnf:
+        diferenca = valor_total - vnf
+        print('Valor Total da Nota (vNF) = R${}\n'
+              'Valor Pago = R${}\n'
+              'Diferença = R${}'.format(vnf, valor_total, diferenca))
+    else:
+        print('Valor Total da Nota (vNF) = R${}\n'
+              'Valor Pago = R${}\n'.format(vnf, valor_total))

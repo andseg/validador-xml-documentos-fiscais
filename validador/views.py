@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as ET
 from django.shortcuts import render
-from validador.rulesXML import validator_rules, validador_rules_nfce
+from validador.rulesXML import validator_rules, validador_rules_nfce, rules_recebimentos
 from .forms import UploadFileForm
 
 
@@ -154,8 +154,16 @@ def index(request):
                         'valor_total': valor_prod_nfc.text,
                     }
                     produtos.append(produto)
+
+                valor_total = root.find(caminho + 'ns:total/ns:ICMSTot/ns:vNF', nsNFE)
+                recebimento = []
+                for pag in root.findall(caminho + 'ns:pag/ns:detPag', nsNFE):
+                    pagamento = pag.find('ns:vPag', nsNFE)
+                    recebimento.append(float(pagamento.text))
+                rules_recebimentos(recebimento, float(valor_total.text))
                 alq_validado = validador_rules_nfce(emit_uf.text, lista_alq_produto_nfc)
                 print(alq_validado)
+
                 infor = {
                     'metodo': request.method,
                     'form': form,
@@ -167,9 +175,9 @@ def index(request):
                     'produtos': produtos,
                     'xml': xml,
                     'modelo': modelo_nfe.text,
-                    'alq_validado': alq_validado
+                    'alq_validado': alq_validado,
                 }
-                return validadorxml(request, infor)
+                return render(request, "validador/validadorxml.html", infor)
     else:
         form = UploadFileForm()
     return render(request, "validador/index.html", {"form": form, "metodo": request.method})

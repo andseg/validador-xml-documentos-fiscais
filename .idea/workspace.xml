@@ -4,16 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f16563f2-7a07-4260-a4c4-0bf4eb3a6a81" name="Changes" comment="'Testando Commit Development'">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="a5280a35-bd46-4c88-a6a3-d5894f7e4bbe" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_04_05_2023_11_34__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_04_05_2023_11_34__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/validador/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/validador/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/validador/style_validador.css" beforeDir="false" afterPath="$PROJECT_DIR$/templates/static/css/style_validador.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/validador/validadorxml.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/validador/validadorxml.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/validador/rulesXML.py" beforeDir="false" afterPath="$PROJECT_DIR$/validador/rulesXML.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/validador/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/validador/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/validador/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/validador/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,7 +32,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="consulta_nota" />
+        <entry key="$PROJECT_DIR$" value="development" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -67,7 +65,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "configurable.group.build"
+    "settings.editor.selected.configurable": "editor.preferences.tabs"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -75,7 +73,7 @@
       <recent name="C:\Users\Unika Sistemas\IdeaProjects\validador-xml-documentos-fiscais2\validador" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.views">
+  <component name="RunManager">
     <configuration name="handler" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="validador-xml-documentos-fiscais2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -227,9 +225,9 @@
     <option name="LAST_COMMIT_MESSAGE" value="'Testando Commit Development'" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/validador_xml_documentos_fiscais2$rulesXML__1_.coverage" NAME="rulesXML (1) Coverage Results" MODIFIED="1683300134969" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/validador" />
+    <SUITE FILE_PATH="coverage/validador_xml_documentos_fiscais2$views.coverage" NAME="views Coverage Results" MODIFIED="1683569687240" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/validador" />
     <SUITE FILE_PATH="coverage/validador_xml_documentos_fiscais2$rulesXML.coverage" NAME="rulesXML Coverage Results" MODIFIED="1683297312852" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/validador/rules" />
     <SUITE FILE_PATH="coverage/validador_xml_documentos_fiscais2$handler.coverage" NAME="handler Coverage Results" MODIFIED="1683296202944" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/validador" />
-    <SUITE FILE_PATH="coverage/validador_xml_documentos_fiscais2$views.coverage" NAME="views Coverage Results" MODIFIED="1683569687240" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/validador" />
+    <SUITE FILE_PATH="coverage/validador_xml_documentos_fiscais2$rulesXML__1_.coverage" NAME="rulesXML (1) Coverage Results" MODIFIED="1683300134969" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/validador" />
   </component>
 </project>

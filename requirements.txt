@@ -5,3 +5,4 @@ sqlparse
 tzdata
 gunicorn
 pandas
+xmlschema

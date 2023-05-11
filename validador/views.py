@@ -90,7 +90,13 @@ def index(request):
                     }
                     produtos.append(produto)
                 alq_validado = validator_rules(emit_uf.text, det_uf.text, lista_alq_produto)
-                print(alq_validado)
+                valor_total = root.find(caminho + 'ns:total/ns:ICMSTot/ns:vNF', nsNFE)
+                recebimento = []
+
+                for pag in root.findall(caminho + 'ns:pag/ns:detPag', nsNFE):
+                    pagamento = pag.find('ns:vPag', nsNFE)
+                    recebimento.append(float(pagamento.text))
+                erro_pagamento = rules_recebimentos(recebimento, float(valor_total.text))
                 infor = {
                     'metodo': request.method,
                     'form': form,
@@ -104,7 +110,8 @@ def index(request):
                     'produtos': produtos,
                     'xml': xml,
                     'modelo': modelo_nfe.text,
-                    'alq_validado': alq_validado
+                    'alq_validado': alq_validado,
+                    'erro_pagamento': erro_pagamento
                 }
                 return validadorxml(request, infor)
 
@@ -160,9 +167,8 @@ def index(request):
                 for pag in root.findall(caminho + 'ns:pag/ns:detPag', nsNFE):
                     pagamento = pag.find('ns:vPag', nsNFE)
                     recebimento.append(float(pagamento.text))
-                rules_recebimentos(recebimento, float(valor_total.text))
+                erro_pagamento = rules_recebimentos(recebimento, float(valor_total.text))
                 alq_validado = validador_rules_nfce(emit_uf.text, lista_alq_produto_nfc)
-                print(alq_validado)
 
                 infor = {
                     'metodo': request.method,
@@ -176,6 +182,7 @@ def index(request):
                     'xml': xml,
                     'modelo': modelo_nfe.text,
                     'alq_validado': alq_validado,
+                    'erro_pagamento': erro_pagamento
                 }
                 return render(request, "validador/validadorxml.html", infor)
     else:

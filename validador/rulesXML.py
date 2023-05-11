@@ -35,12 +35,10 @@ def validador_rules_nfce(origin, alq_nfc):
 
 def rules_recebimentos(vpag, vnf):
     valor_total = sum(vpag)
-    print(valor_total)
     if valor_total != vnf:
         diferenca = valor_total - vnf
-        print('Valor Total da Nota (vNF) = R${}\n'
-              'Valor Pago = R${}\n'
-              'Diferença = R${}'.format(vnf, valor_total, diferenca))
+        retorno = ('vPag Erro  ' + 'Valor Total = R$' + str(vnf) + 'Valor Pago = R$' + str(valor_total) + 'Diferença = R$' + str(diferenca))
+        return retorno
     else:
-        print('Valor Total da Nota (vNF) = R${}\n'
-              'Valor Pago = R${}\n'.format(vnf, valor_total))
+        retorno = 'vPag - OK'
+        return retorno

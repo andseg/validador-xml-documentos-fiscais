@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a5280a35-bd46-4c88-a6a3-d5894f7e4bbe" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_04_05_2023_11_34__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_04_05_2023_11_34__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/validador/style_validador.css" beforeDir="false" afterPath="$PROJECT_DIR$/templates/static/css/style_validador.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/static/css/style_validador.css" beforeDir="false" afterPath="$PROJECT_DIR$/templates/static/css/style_validador.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/validador/validadorxml.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/validador/validadorxml.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/validador/rulesXML.py" beforeDir="false" afterPath="$PROJECT_DIR$/validador/rulesXML.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/validador/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/validador/views.py" afterDir="false" />

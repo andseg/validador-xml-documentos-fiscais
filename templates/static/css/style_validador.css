@@ -14,11 +14,40 @@ body {
     width: 68px;
 }
 
+.divButton {
+    margin-top: 2vw;
+    margin-left: 1vw;
+}
+
+.buttonXml {
+    width: 5vw;
+    height: 2vw;
+    border-radius: 0.5vw;
+}
+
+.buttonErro {
+    width: 5vw;
+    height: 2vw;
+    border-radius: 0.5vw;
+    margin-left: 1vw;
+}
+
+.mostraXML {
+    background: ivory;
+    height: 20vw;
+    overflow-y: scroll;
+    overflow-x: auto;
+    width: 100%;
+    border-style: double;
+}
+
+
+
 .infoEmit {
-    margin-top: 3vw;
-    background: #e8e8e8;
-    border-radius: 2vw;
-    width: 55vw;
+    margin-top: 1vw;
+    background: ivory;
+    border-radius: 1vw;
+    width: 100%;
     height: 100%;
 }
 
@@ -26,6 +55,10 @@ body {
     font-size: 14px;
     margin-left: 2vw;
 }
+
+
+
+
 
 .infoDest {
     margin-top: 0.5vw;
@@ -40,14 +73,6 @@ body {
     margin-left: 2vw;
 }
 
-.mostraXML {
-    background: #dddddd;
-    height: 20vw;
-    overflow-y: scroll;
-    overflow-x: auto;
-    width: 55vw;
-    margin-top: 2vw;
-}
 
 {% if modelo == '55' %}
 .produtos {
@@ -55,7 +80,7 @@ body {
     background: #e8e8e8;
     border-radius: 2vw;
     width: 40vw;
-    height: 42.5vw;
+    height: 38.5vw;
     margin-left: 57.5vw;
     overflow-y: auto;
     overflow-x: auto;
@@ -68,7 +93,7 @@ body {
     background: #e8e8e8;
     border-radius: 2vw;
     width: 40vw;
-    height: 42.5vw;
+    height: 38.5vw;
     margin-left: 57.5vw;
     overflow-y: auto;
     overflow-x: auto;

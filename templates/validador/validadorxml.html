@@ -10,14 +10,30 @@
 
         <script>
             function xml_info(){
-                var xml = document.querySelector('.mostraXML');
+                var xml = document.querySelector('.textInfo');
                 xml.innerHTML='' + '<pre>{{ xml }}</pre>' + '</div>'
             }
 
             function error_info(){
-                var erro = document.querySelector('.mostraXML');
+                var erro = document.querySelector('.textInfo');
                 erro.innerHTML='' + '<p> {{ erro_pagamento }} <br> {{ alq_validado }} </p>' + '</div>'
             }
+
+            function product_info(){
+                var prod= document.querySelector('.textInfo');
+                prod.innerHTML='' +
+                    '{% for produto in produtos %}' +
+                    '<p> <strong> Nome: </strong> {{ produto.nome }} <strong> Código: </strong> {{ produto.codigo }}</p>'+
+                    '<p> <strong> Valor Unitário: </strong> R$ {{ produto.valor_unitario }} <strong> Quantidade: </strong> {{ produto.quantidade }} <strong> Valor Total: </strong> R$ {{ produto.valor_total }}</p>'+
+                    '<br>'+
+                    '{% endfor %}'
+            }
+
+            function info_nf(){
+                var info = document.querySelector('.textInfo');
+                info.innerHTML='' + '<p> <strong> Data-Hora Emissão: </strong> {{ data }} '
+            }
+
         </script>
     </head>
     <body>
@@ -31,9 +47,13 @@
             <div class="divButton">
                 <button onclick="xml_info()" class="buttonXml"> XML </button>
                 <button onclick="error_info()" class="buttonErro"> Erros </button>
+                <button onclick="product_info()" class="buttonProduct"> Produtos </button>
+                <button onclick="info_nf()" class="buttonInfo"> Geral </button>
             </div>
             <div class="mostraXML" id="xml">
-                <pre>{{ xml }}</pre>
+                <div class="textInfo">
+                    <pre>{{ xml }}</pre>
+                </div>
             </div>
             <div class="infoEmit">
                 <div class="infoEmiteStyle">

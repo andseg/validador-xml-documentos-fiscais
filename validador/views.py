@@ -1,7 +1,8 @@
 import xml.etree.ElementTree as ET
 from django.shortcuts import render
-from validador.rulesXML import validator_rules, validador_rules_nfce, rules_recebimentos
+from validador.rulesXML import validator_rules, rules_recebimentos
 from .forms import UploadFileForm
+from datetime import datetime
 
 
 def validadorxml(request, infor):
@@ -15,7 +16,7 @@ def index(request):
             file = ET.parse(request.FILES["file"])
             root = file.getroot()
 
-            xml = ET.tostring(root, encoding='unicode', method='xml')
+            xml = ET.tostring(root, encoding='UTF-8', method='xml')
             nsNFE = {
                 'ns': "http://www.portalfiscal.inf.br/nfe"
             }
@@ -27,6 +28,7 @@ def index(request):
 
             modelo_nfe = root.find(caminho + 'ns:ide/ns:mod', nsNFE)
             # VALIDAÇÃO DO TIPO DE NOTA FISCAL
+
             if modelo_nfe.text == '55':
                 serie_nfe = root.find(caminho + 'ns:ide/ns:serie', nsNFE)
                 numero_nfe = root.find(caminho + 'ns:ide/ns:nNF', nsNFE)
@@ -36,6 +38,9 @@ def index(request):
 
                 cnpj_emit_nfe = root.find(caminho + 'ns:emit/ns:CNPJ', nsNFE)
                 cnpj_dest_nfe = root.find(caminho + 'ns:dest/ns:CNPJ', nsNFE)
+                data_emi = root.find(caminho + 'ns:ide/ns:dhEmi', nsNFE)
+                data_objeto = datetime.fromisoformat(data_emi.text)
+                data_formatada = data_objeto.strftime("%d-%m-%Y %H:%M")
                 fisico = False
                 if cnpj_dest_nfe is None:
                     fisico = True
@@ -50,8 +55,12 @@ def index(request):
                     if alq_icms_nfe is not None:
                         lista_alq_produto.append(alq_icms_nfe.text)
                     else:
-                        alq_icms_nfe = '0'
-                        lista_alq_produto.append(alq_icms_nfe)
+                        alq_icms_nfe = det.find('ns:imposto/ns:ICMS/ns:ICMS00/ns:pICMS', nsNFE)
+                        if alq_icms_nfe is not None:
+                            lista_alq_produto.append(alq_icms_nfe.text)
+                        else:
+                            alq_icms_nfe = '0'
+                            lista_alq_produto.append(alq_icms_nfe)
 
                 chave_nfc = root.find('ns:infNFe', nsNFE)
                 if chave_nfc is None:
@@ -89,8 +98,9 @@ def index(request):
                         'valor_total': valor_prod_nfe.text,
                     }
                     produtos.append(produto)
-                alq_validado = validator_rules(emit_uf.text, det_uf.text, lista_alq_produto)
                 valor_total = root.find(caminho + 'ns:total/ns:ICMSTot/ns:vNF', nsNFE)
+                valor_tribut = root.find(caminho + 'ns:total/ns:ICMSTot/ns:vTotTrib', nsNFE)
+                alq_validado = validator_rules(emit_uf.text, det_uf.text, modelo_nfe.text, float(valor_total.text), lista_alq_produto, float(valor_tribut.text))
                 recebimento = []
 
                 for pag in root.findall(caminho + 'ns:pag/ns:detPag', nsNFE):
@@ -111,7 +121,8 @@ def index(request):
                     'xml': xml,
                     'modelo': modelo_nfe.text,
                     'alq_validado': alq_validado,
-                    'erro_pagamento': erro_pagamento
+                    'erro_pagamento': erro_pagamento,
+                    'data': data_formatada
                 }
                 return validadorxml(request, infor)
 
@@ -125,14 +136,24 @@ def index(request):
 
                 # Para fins de validação
                 emit_uf = root.find(caminho + 'ns:emit/ns:enderEmit/ns:UF', nsNFE)
+                data_emi = root.find(caminho + 'ns:ide/ns:dhEmi', nsNFE)
+                data_objeto = datetime.fromisoformat(data_emi.text)
+                data_formatada = data_objeto.strftime("%d-%m-%Y %H:%M")
                 lista_alq_produto_nfc = []
                 for det in root.findall(caminho + 'ns:det', nsNFE):
                     alq_icms_nfc = det.find('ns:imposto/ns:ICMS/ns:ICMS20/ns:pICMS', nsNFE)
                     if alq_icms_nfc is not None:
                         lista_alq_produto_nfc.append(alq_icms_nfc.text)
                     else:
-                        alq_icms_nfc = '0'
-                        lista_alq_produto_nfc.append(alq_icms_nfc)
+                        alq_icms_nfe = det.find('ns:imposto/ns:ICMS/ns:ICMS00/ns:pICMS', nsNFE)
+                        if alq_icms_nfe is not None:
+                            lista_alq_produto_nfc.append(alq_icms_nfe.text)
+                        else:
+                            # vTotTrib * 100 / vNf = Aliquota ICMS
+                            # total_tributos = det.find('ns:total/ns:ICMSTot/ns:vTotTrib', nsNFE)
+                            # alq_icms_nfe = (float(total_tributos.text) * 100) / float(valor_total.text)
+                            alq_icms_nfe = '0'
+                            lista_alq_produto_nfc.append(alq_icms_nfe)
 
                 chave_nfc = root.find('ns:infNFe', nsNFE)
                 if chave_nfc is None:
@@ -152,13 +173,13 @@ def index(request):
                     codigo_prod_nfc = det.find('ns:prod/ns:cProd', nsNFE)
                     valor_prod_nfc = det.find('ns:prod/ns:vProd', nsNFE)
                     qtd_prod_nfc = det.find('ns:prod/ns:qCom', nsNFE)
-                    qtd_prod_format = round(float(qtd_prod_nfc.text))
+                    qtd_prod_format = float(qtd_prod_nfc.text)
                     produto = {
                         'codigo': codigo_prod_nfc.text,
                         'nome': nome_prod_nfc.text,
                         'valor_unitario': item_prod_format,
                         'quantidade': qtd_prod_format,
-                        'valor_total': valor_prod_nfc.text,
+                        'valor_total': valor_prod_nfc.text
                     }
                     produtos.append(produto)
 
@@ -168,7 +189,8 @@ def index(request):
                     pagamento = pag.find('ns:vPag', nsNFE)
                     recebimento.append(float(pagamento.text))
                 erro_pagamento = rules_recebimentos(recebimento, float(valor_total.text))
-                alq_validado = validador_rules_nfce(emit_uf.text, lista_alq_produto_nfc)
+                valor_tribut = root.find(caminho + 'ns:total/ns:ICMSTot/ns:vTotTrib', nsNFE)
+                alq_validado = validator_rules(emit_uf.text, emit_uf.text, modelo_nfe.text, float(valor_total.text), lista_alq_produto_nfc, float(valor_tribut.text))
 
                 infor = {
                     'metodo': request.method,
@@ -182,7 +204,8 @@ def index(request):
                     'xml': xml,
                     'modelo': modelo_nfe.text,
                     'alq_validado': alq_validado,
-                    'erro_pagamento': erro_pagamento
+                    'erro_pagamento': erro_pagamento,
+                    'data': data_formatada
                 }
                 return render(request, "validador/validadorxml.html", infor)
     else:

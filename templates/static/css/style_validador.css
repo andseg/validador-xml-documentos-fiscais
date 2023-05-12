@@ -16,16 +16,33 @@ body {
 
 .divButton {
     margin-top: 2vw;
-    margin-left: 1vw;
+    background: cadetblue;
+    width: 35vw;
+    border-top-right-radius: 1vw;
 }
 
 .buttonXml {
     width: 5vw;
     height: 2vw;
+    margin-left: 1vw;
     border-radius: 0.5vw;
 }
 
 .buttonErro {
+    width: 5vw;
+    height: 2vw;
+    border-radius: 0.5vw;
+    margin-left: 1vw;
+}
+
+.buttonProduct {
+    width: 5vw;
+    height: 2vw;
+    border-radius: 0.5vw;
+    margin-left: 1vw;
+}
+
+.buttonInfo{
     width: 5vw;
     height: 2vw;
     border-radius: 0.5vw;
@@ -41,7 +58,9 @@ body {
     border-style: double;
 }
 
-
+.textInfo {
+    margin-left: 1vw;
+}
 
 .infoEmit {
     margin-top: 1vw;

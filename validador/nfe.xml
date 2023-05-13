@@ -1,523 +1,185 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-  <infNFe Id="NFe51230436309452000105550020000005061870525762" versao="4.00">
-    <ide>
-      <cUF>51</cUF>
-      <cNF>87052576</cNF>
-      <natOp>NFe emitida em decorrencia de Cupom Fiscal ou NFCe</natOp>
-      <mod>55</mod>
-      <serie>2</serie>
-      <nNF>506</nNF>
-      <dhEmi>2023-04-27T15:59:27-03:00</dhEmi>
-      <dhSaiEnt>2023-04-27T16:01:27-03:00</dhSaiEnt>
-      <tpNF>1</tpNF>
-      <idDest>1</idDest>
-      <cMunFG>5103353</cMunFG>
-      <tpImp>1</tpImp>
-      <tpEmis>1</tpEmis>
-      <cDV>2</cDV>
-      <tpAmb>1</tpAmb>
-      <finNFe>1</finNFe>
-      <indFinal>0</indFinal>
-      <indPres>1</indPres>
-      <procEmi>0</procEmi>
-      <verProc>OOBJ-DFe-0909.0.0</verProc>
-    </ide>
-    <emit>
-      <CNPJ>36309452000105</CNPJ>
-      <xNome>CONFESTA PRODUTOS PARA FESTA LTDA</xNome>
-      <xFant>CONFESTA PRODUTOS PARA FESTA LTDA</xFant>
-      <enderEmit>
-        <xLgr>AV BRASIL</xLgr>
-        <nro>520B</nro>
-        <xBairro>CENTRO</xBairro>
-        <cMun>5103353</cMun>
-        <xMun>Confresa</xMun>
-        <UF>MT</UF>
-        <CEP>78652000</CEP>
-        <cPais>1058</cPais>
-        <xPais>Brasil</xPais>
-        <fone>66984439827</fone>
-      </enderEmit>
-      <IE>138027099</IE>
-      <CRT>1</CRT>
-    </emit>
-    <dest>
-      <CNPJ>04669298000188</CNPJ>
-      <xNome>WCTM SUPERMERCADO</xNome>
-      <enderDest>
-        <xLgr>Av BRAsil</xLgr>
-        <nro>486</nro>
-        <xBairro>CENTRO</xBairro>
-        <cMun>5103353</cMun>
-        <xMun>Confresa</xMun>
-        <UF>MT</UF>
-        <CEP>78652000</CEP>
-        <cPais>1058</cPais>
-        <xPais>Brasil</xPais>
-        <fone>6635641533</fone>
-      </enderDest>
-      <indIEDest>1</indIEDest>
-      <IE>137505230</IE>
-    </dest>
-    <autXML>
-      <CPF>88010473120</CPF>
-    </autXML>
-    <det nItem="1">
-      <prod>
-        <cProd>115616</cProd>
-        <cEAN>SEM GTIN</cEAN>
-        <xProd>FUNDO REND PLAC 100UN NR 07 OURO</xProd>
-        <NCM>39202019</NCM>
-        <CEST>1901400</CEST>
-        <CFOP>5102</CFOP>
-        <uCom>UN</uCom>
-        <qCom>1.0000</qCom>
-        <vUnCom>3.9900000000</vUnCom>
-        <vProd>3.99</vProd>
-        <cEANTrib>SEM GTIN</cEANTrib>
-        <uTrib>UN</uTrib>
-        <qTrib>1.0000</qTrib>
-        <vUnTrib>3.9900000000</vUnTrib>
-        <indTot>1</indTot>
-      </prod>
-      <imposto>
-        <vTotTrib>1.36</vTotTrib>
-        <ICMS>
-          <ICMSSN102>
-            <orig>0</orig>
-            <CSOSN>102</CSOSN>
-          </ICMSSN102>
-        </ICMS>
-        <PIS>
-          <PISOutr>
-            <CST>99</CST>
-            <vBC>0.00</vBC>
-            <pPIS>0.00</pPIS>
-            <vPIS>0.00</vPIS>
-          </PISOutr>
-        </PIS>
-        <COFINS>
-          <COFINSOutr>
-            <CST>99</CST>
-            <vBC>0.00</vBC>
-            <pCOFINS>0.00</pCOFINS>
-            <vCOFINS>0.00</vCOFINS>
-          </COFINSOutr>
-        </COFINS>
-      </imposto>
-    </det>
-    <det nItem="2">
-      <prod>
-        <cProd>105668</cProd>
-        <cEAN>SEM GTIN</cEAN>
-        <xProd>FORMA 4 PETALAS NC TOYS 50UN POA LARANJA/BRANCO (10.26)</xProd>
-        <NCM>49119900</NCM>
-        <CEST>2804000</CEST>
-        <CFOP>5102</CFOP>
-        <uCom>UN</uCom>
-        <qCom>1.0000</qCom>
-        <vUnCom>3.4900000000</vUnCom>
-        <vProd>3.49</vProd>
-        <cEANTrib>SEM GTIN</cEANTrib>
-        <uTrib>UN</uTrib>
-        <qTrib>1.0000</qTrib>
-        <vUnTrib>3.4900000000</vUnTrib>
-        <indTot>1</indTot>
-      </prod>
-      <imposto>
-        <vTotTrib>1.06</vTotTrib>
-        <ICMS>
-          <ICMSSN102>
-            <orig>0</orig>
-            <CSOSN>102</CSOSN>
-          </ICMSSN102>
-        </ICMS>
-        <PIS>
-          <PISOutr>
-            <CST>99</CST>
-            <vBC>0.00</vBC>
-            <pPIS>0.00</pPIS>
-            <vPIS>0.00</vPIS>
-          </PISOutr>
-        </PIS>
-        <COFINS>
-          <COFINSOutr>
-            <CST>99</CST>
-            <vBC>0.00</vBC>
-            <pCOFINS>0.00</pCOFINS>
-            <vCOFINS>0.00</vCOFINS>
-          </COFINSOutr>
-        </COFINS>
-      </imposto>
-    </det>
-    <det nItem="3">
-      <prod>
-        <cProd>115670</cProd>
-        <cEAN>SEM GTIN</cEAN>
-        <xProd>FUNDO REND PLAC 100UN NR 07 ROSA</xProd>
-        <NCM>39202019</NCM>
-        <CEST>1901400</CEST>
-        <CFOP>5102</CFOP>
-        <uCom>UN</uCom>
-        <qCom>1.0000</qCom>
-        <vUnCom>3.9900000000</vUnCom>
-        <vProd>3.99</vProd>
-        <cEANTrib>SEM GTIN</cEANTrib>
-        <uTrib>UN</uTrib>
-        <qTrib>1.0000</qTrib>
-        <vUnTrib>3.9900000000</vUnTrib>
-        <indTot>1</indTot>
-      </prod>
-      <imposto>
-        <vTotTrib>1.36</vTotTrib>
-        <ICMS>
-          <ICMSSN102>
-            <orig>0</orig>
-            <CSOSN>102</CSOSN>
-          </ICMSSN102>
-        </ICMS>
-        <PIS>
-          <PISOutr>
-            <CST>99</CST>
-            <vBC>0.00</vBC>
-            <pPIS>0.00</pPIS>
-            <vPIS>0.00</vPIS>
-          </PISOutr>
-        </PIS>
-        <COFINS>
-          <COFINSOutr>
-            <CST>99</CST>
-            <vBC>0.00</vBC>
-            <pCOFINS>0.00</pCOFINS>
-            <vCOFINS>0.00</vCOFINS>
-          </COFINSOutr>
-        </COFINS>
-      </imposto>
-    </det>
-    <det nItem="4">
-      <prod>
-        <cProd>55936259</cProd>
-        <cEAN>SEM GTIN</cEAN>
-        <xProd>FORMA 4 PETALAS NC TOYS 50UN DECORADA LINHA HALLOWEN (62.3)</xProd>
-        <NCM>49119900</NCM>
-        <CEST>2804000</CEST>
-        <CFOP>5102</CFOP>
-        <uCom>UN</uCom>
-        <qCom>1.0000</qCom>
-        <vUnCom>3.4900000000</vUnCom>
-        <vProd>3.49</vProd>
-        <cEANTrib>SEM GTIN</cEANTrib>
-        <uTrib>UN</uTrib>
-        <qTrib>1.0000</qTrib>
-        <vUnTrib>3.4900000000</vUnTrib>
-        <indTot>1</indTot>
-      </prod>
-      <imposto>
-        <vTotTrib>1.06</vTotTrib>
-        <ICMS>
-          <ICMSSN102>
-            <orig>0</orig>
-            <CSOSN>102</CSOSN>
-          </ICMSSN102>
-        </ICMS>
-        <PIS>
-          <PISOutr>
-            <CST>99</CST>
-            <vBC>0.00</vBC>
-            <pPIS>0.00</pPIS>
-            <vPIS>0.00</vPIS>
-          </PISOutr>
-        </PIS>
-        <COFINS>
-          <COFINSOutr>
-            <CST>99</CST>
-            <vBC>0.00</vBC>
-            <pCOFINS>0.00</pCOFINS>
-            <vCOFINS>0.00</vCOFINS>
-          </COFINSOutr>
-        </COFINS>
-      </imposto>
-    </det>
-    <det nItem="5">
-      <prod>
-        <cProd>124356200</cProd>
-        <cEAN>SEM GTIN</cEAN>
-        <xProd>FORMA BWB CRISTAL SP 708 ALFABETO (3517)</xProd>
-        <NCM>39041090</NCM>
-        <CEST>1001000</CEST>
-        <CFOP>5102</CFOP>
-        <uCom>UN</uCom>
-        <qCom>1.0000</qCom>
-        <vUnCom>5.9900000000</vUnCom>
-        <vProd>5.99</vProd>
-        <cEANTrib>SEM GTIN</cEANTrib>
-        <uTrib>UN</uTrib>
-        <qTrib>1.0000</qTrib>
-        <vUnTrib>5.9900000000</vUnTrib>
-        <indTot>1</indTot>
-      </prod>
-      <imposto>
-        <vTotTrib>1.91</vTotTrib>
-        <ICMS>
-          <ICMSSN102>
-            <orig>0</orig>
-            <CSOSN>102</CSOSN>
-          </ICMSSN102>
-        </ICMS>
-        <PIS>
-          <PISOutr>
-            <CST>99</CST>
-            <vBC>0.00</vBC>
-            <pPIS>0.00</pPIS>
-            <vPIS>0.00</vPIS>
-          </PISOutr>
-        </PIS>
-        <COFINS>
-          <COFINSOutr>
-            <CST>99</CST>
-            <vBC>0.00</vBC>
-            <pCOFINS>0.00</pCOFINS>
-            <vCOFINS>0.00</vCOFINS>
-          </COFINSOutr>
-        </COFINS>
-      </imposto>
-    </det>
-    <det nItem="6">
-      <prod>
-        <cProd>370833434</cProd>
-        <cEAN>SEM GTIN</cEAN>
-        <xProd>FORMA SEMI PROF NISHIMOTO UNID CEREJAO (SP56)</xProd>
-        <NCM>39041090</NCM>
-        <CEST>1001000</CEST>
-        <CFOP>5102</CFOP>
-        <uCom>UN</uCom>
-        <qCom>3.0000</qCom>
-        <vUnCom>3.4900000000</vUnCom>
-        <vProd>10.47</vProd>
-        <cEANTrib>SEM GTIN</cEANTrib>
-        <uTrib>UN</uTrib>
-        <qTrib>3.0000</qTrib>
-        <vUnTrib>3.4900000000</vUnTrib>
-        <indTot>1</indTot>
-      </prod>
-      <imposto>
-        <vTotTrib>3.35</vTotTrib>
-        <ICMS>
-          <ICMSSN102>
-            <orig>0</orig>
-            <CSOSN>102</CSOSN>
-          </ICMSSN102>
-        </ICMS>
-        <PIS>
-          <PISOutr>
-            <CST>99</CST>
-            <vBC>0.00</vBC>
-            <pPIS>0.00</pPIS>
-            <vPIS>0.00</vPIS>
-          </PISOutr>
-        </PIS>
-        <COFINS>
-          <COFINSOutr>
-            <CST>99</CST>
-            <vBC>0.00</vBC>
-            <pCOFINS>0.00</pCOFINS>
-            <vCOFINS>0.00</vCOFINS>
-          </COFINSOutr>
-        </COFINS>
-      </imposto>
-    </det>
-    <det nItem="7">
-      <prod>
-        <cProd>39682277</cProd>
-        <cEAN>SEM GTIN</cEAN>
-        <xProd>FORMA BWB CRISTAL CORACAO RISCADO (27)</xProd>
-        <NCM>84382019</NCM>
-        <CEST>2109000</CEST>
-        <CFOP>5102</CFOP>
-        <uCom>UN</uCom>
-        <qCom>1.0000</qCom>
-        <vUnCom>1.4900000000</vUnCom>
-        <vProd>1.49</vProd>
-        <cEANTrib>SEM GTIN</cEANTrib>
-        <uTrib>UN</uTrib>
-        <qTrib>1.0000</qTrib>
-        <vUnTrib>1.4900000000</vUnTrib>
-        <indTot>1</indTot>
-      </prod>
-      <imposto>
-        <vTotTrib>0.33</vTotTrib>
-        <ICMS>
-          <ICMSSN102>
-            <orig>0</orig>
-            <CSOSN>102</CSOSN>
-          </ICMSSN102>
-        </ICMS>
-        <PIS>
-          <PISOutr>
-            <CST>99</CST>
-            <vBC>0.00</vBC>
-            <pPIS>0.00</pPIS>
-            <vPIS>0.00</vPIS>
-          </PISOutr>
-        </PIS>
-        <COFINS>
-          <COFINSOutr>
-            <CST>99</CST>
-            <vBC>0.00</vBC>
-            <pCOFINS>0.00</pCOFINS>
-            <vCOFINS>0.00</vCOFINS>
-          </COFINSOutr>
-        </COFINS>
-      </imposto>
-    </det>
-    <det nItem="8">
-      <prod>
-        <cProd>72734</cProd>
-        <cEAN>SEM GTIN</cEAN>
-        <xProd>COBERTURA HARALD CONFEITEIRO 1,05KG AO LEITE (103944)</xProd>
-        <NCM>18069000</NCM>
-        <CEST>1700400</CEST>
-        <CFOP>5102</CFOP>
-        <uCom>UN</uCom>
-        <qCom>2.0000</qCom>
-        <vUnCom>31.4900000000</vUnCom>
-        <vProd>62.98</vProd>
-        <cEANTrib>SEM GTIN</cEANTrib>
-        <uTrib>UN</uTrib>
-        <qTrib>2.0000</qTrib>
-        <vUnTrib>31.4900000000</vUnTrib>
-        <indTot>1</indTot>
-        <nFCI>745B49C1-9FDB-4193-9BF9-4C333664C425</nFCI>
-      </prod>
-      <imposto>
-        <vTotTrib>20.15</vTotTrib>
-        <ICMS>
-          <ICMSSN500>
-            <orig>0</orig>
-            <CSOSN>500</CSOSN>
-            <vBCSTRet>0.00</vBCSTRet>
-            <pST>0.00</pST>
-            <vICMSSubstituto>0.00</vICMSSubstituto>
-            <vICMSSTRet>0.00</vICMSSTRet>
-          </ICMSSN500>
-        </ICMS>
-        <PIS>
-          <PISOutr>
-            <CST>99</CST>
-            <vBC>0.00</vBC>
-            <pPIS>0.00</pPIS>
-            <vPIS>0.00</vPIS>
-          </PISOutr>
-        </PIS>
-        <COFINS>
-          <COFINSOutr>
-            <CST>99</CST>
-            <vBC>0.00</vBC>
-            <pCOFINS>0.00</pCOFINS>
-            <vCOFINS>0.00</vCOFINS>
-          </COFINSOutr>
-        </COFINS>
-      </imposto>
-    </det>
-    <det nItem="9">
-      <prod>
-        <cProd>72760</cProd>
-        <cEAN>SEM GTIN</cEAN>
-        <xProd>COBERTURA HARALD CONFEITEIRO 1,01KG BRANCO (103943)</xProd>
-        <NCM>17049090</NCM>
-        <CEST>1001000</CEST>
-        <CFOP>5102</CFOP>
-        <uCom>UN</uCom>
-        <qCom>1.0000</qCom>
-        <vUnCom>33.9900000000</vUnCom>
-        <vProd>33.99</vProd>
-        <cEANTrib>SEM GTIN</cEANTrib>
-        <uTrib>UN</uTrib>
-        <qTrib>1.0000</qTrib>
-        <vUnTrib>33.9900000000</vUnTrib>
-        <indTot>1</indTot>
-        <nFCI>F5EE29F0-A9F9-4A84-96DA-537D3CA60101</nFCI>
-      </prod>
-      <imposto>
-        <vTotTrib>10.88</vTotTrib>
-        <ICMS>
-          <ICMSSN102>
-            <orig>0</orig>
-            <CSOSN>102</CSOSN>
-          </ICMSSN102>
-        </ICMS>
-        <PIS>
-          <PISOutr>
-            <CST>99</CST>
-            <vBC>0.00</vBC>
-            <pPIS>0.00</pPIS>
-            <vPIS>0.00</vPIS>
-          </PISOutr>
-        </PIS>
-        <COFINS>
-          <COFINSOutr>
-            <CST>99</CST>
-            <vBC>0.00</vBC>
-            <pCOFINS>0.00</pCOFINS>
-            <vCOFINS>0.00</vCOFINS>
-          </COFINSOutr>
-        </COFINS>
-      </imposto>
-    </det>
-    <total>
-      <ICMSTot>
-        <vBC>0.00</vBC>
-        <vICMS>0.00</vICMS>
-        <vICMSDeson>0.00</vICMSDeson>
-        <vFCP>0.00</vFCP>
-        <vBCST>0.00</vBCST>
-        <vST>0.00</vST>
-        <vFCPST>0.00</vFCPST>
-        <vFCPSTRet>0.00</vFCPSTRet>
-        <vProd>129.88</vProd>
-        <vFrete>0.00</vFrete>
-        <vSeg>0.00</vSeg>
-        <vDesc>0.00</vDesc>
-        <vII>0.00</vII>
-        <vIPI>0.00</vIPI>
-        <vIPIDevol>0.00</vIPIDevol>
-        <vPIS>0.00</vPIS>
-        <vCOFINS>0.00</vCOFINS>
-        <vOutro>0.00</vOutro>
-        <vNF>129.88</vNF>
-        <vTotTrib>41.46</vTotTrib>
-      </ICMSTot>
-    </total>
-    <transp>
-      <modFrete>9</modFrete>
-      <vol>
-        <qVol>0</qVol>
-      </vol>
-    </transp>
-    <cobr>
-      <fat>
-        <nFat>001</nFat>
-        <vOrig>129.88</vOrig>
-        <vDesc>0.00</vDesc>
-        <vLiq>129.88</vLiq>
-      </fat>
-    </cobr>
-    <pag>
-      <detPag>
-        <tPag>01</tPag>
-        <vPag>150.00</vPag>
-      </detPag>
-      <vTroco>20.12</vTroco>
-    </pag>
-    <infAdic>
-      <infCpl>Valor aproximado dos tributos: R$ 41.46 (31.92%) Fonte IBPT</infCpl>
-    </infAdic>
-    <infRespTec>
-      <CNPJ>08103165000109</CNPJ>
-      <xContato>Elizio Antonio de Rezende</xContato>
-      <email>atendimento@safewaretecnologia.com</email>
-      <fone>6237022602</fone>
-    </infRespTec>
-  </infNFe>
-</NFe>
+<?xml version="1.0" encoding="UTF-8"?>
+<nfeProc versao="4.00" xmlns="http://www.portalfiscal.inf.br/nfe">
+	<NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+		<infNFe Id="NFe52230529637827000192650010002544511845048272" versao="4.00">
+			<ide>
+				<cUF>52</cUF>
+				<cNF>84504827</cNF>
+				<natOp>Venda de Mercadoria</natOp>
+				<mod>65</mod>
+				<serie>1</serie>
+				<nNF>254451</nNF>
+				<dhEmi>2023-05-12T11:36:21-03:00</dhEmi>
+				<tpNF>1</tpNF>
+				<idDest>1</idDest>
+				<cMunFG>5221403</cMunFG>
+				<tpImp>4</tpImp>
+				<tpEmis>1</tpEmis>
+				<cDV>2</cDV>
+				<tpAmb>1</tpAmb>
+				<finNFe>1</finNFe>
+				<indFinal>1</indFinal>
+				<indPres>1</indPres>
+				<procEmi>0</procEmi>
+				<verProc>OOBJ-DFe-0909.0.0</verProc>
+			</ide>
+			<emit>
+				<CNPJ>29637827000192</CNPJ>
+				<xNome>DINAMUS PRODUTOS PARA FESTAS LTDA ME</xNome>
+				<xFant>DINAMUS PRODUTOS PARA FESTAS</xFant>
+				<enderEmit>
+					<xLgr>Avenida Raimundo de Aquino</xLgr>
+					<nro>99</nro>
+					<xBairro>Vila Joao Braz</xBairro>
+					<cMun>5221403</cMun>
+					<xMun>Trindade</xMun>
+					<UF>GO</UF>
+					<CEP>75388412</CEP>
+					<cPais>1058</cPais>
+					<xPais>Brasil</xPais>
+					<fone>6235050346</fone>
+				</enderEmit>
+				<IE>107174871</IE>
+				<CRT>1</CRT>
+			</emit>
+			<autXML>
+				<CPF>73436089168</CPF>
+			</autXML>
+			<det nItem="1">
+				<prod>
+					<cProd>983409548</cProd>
+					<cEAN>SEM GTIN</cEAN>
+					<xProd>MINI BRINQ JUNCO ANEL CRISTAL 10UN (79624)</xProd>
+					<NCM>95030080</NCM>
+					<CFOP>5102</CFOP>
+					<uCom>UN</uCom>
+					<qCom>1.0000</qCom>
+					<vUnCom>5.5900000000</vUnCom>
+					<vProd>5.59</vProd>
+					<cEANTrib>SEM GTIN</cEANTrib>
+					<uTrib>UN</uTrib>
+					<qTrib>1.0000</qTrib>
+					<vUnTrib>5.5900000000</vUnTrib>
+					<indTot>1</indTot>
+				</prod>
+				<imposto>
+					<vTotTrib>1.78</vTotTrib>
+					<ICMS>
+						<ICMSSN102>
+							<orig>0</orig>
+							<CSOSN>102</CSOSN>
+						</ICMSSN102>
+					</ICMS>
+				</imposto>
+				<infAdProd>vBCFCP = 5,59</infAdProd>
+			</det>
+			<det nItem="2">
+				<prod>
+					<cProd>983409548</cProd>
+					<cEAN>SEM GTIN</cEAN>
+					<xProd>MINI BRINQ JUNCO ANEL CRISTAL 10UN (79624)</xProd>
+					<NCM>95030080</NCM>
+					<CFOP>5102</CFOP>
+					<uCom>UN</uCom>
+					<qCom>1.0000</qCom>
+					<vUnCom>5.5900000000</vUnCom>
+					<vProd>5.59</vProd>
+					<cEANTrib>SEM GTIN</cEANTrib>
+					<uTrib>UN</uTrib>
+					<qTrib>1.0000</qTrib>
+					<vUnTrib>5.5900000000</vUnTrib>
+					<indTot>1</indTot>
+				</prod>
+				<imposto>
+					<vTotTrib>1.78</vTotTrib>
+					<ICMS>
+						<ICMSSN102>
+							<orig>0</orig>
+							<CSOSN>102</CSOSN>
+						</ICMSSN102>
+					</ICMS>
+				</imposto>
+				<infAdProd>vBCFCP = 5,59</infAdProd>
+			</det>
+			<total>
+				<ICMSTot>
+					<vBC>0.00</vBC>
+					<vICMS>0.00</vICMS>
+					<vICMSDeson>0.00</vICMSDeson>
+					<vFCP>0.00</vFCP>
+					<vBCST>0.00</vBCST>
+					<vST>0.00</vST>
+					<vFCPST>0.00</vFCPST>
+					<vFCPSTRet>0.00</vFCPSTRet>
+					<vProd>11.18</vProd>
+					<vFrete>0.00</vFrete>
+					<vSeg>0.00</vSeg>
+					<vDesc>0.00</vDesc>
+					<vII>0.00</vII>
+					<vIPI>0.00</vIPI>
+					<vIPIDevol>0.00</vIPIDevol>
+					<vPIS>0.00</vPIS>
+					<vCOFINS>0.00</vCOFINS>
+					<vOutro>0.00</vOutro>
+					<vNF>11.18</vNF>
+					<vTotTrib>3.56</vTotTrib>
+				</ICMSTot>
+			</total>
+			<transp>
+				<modFrete>9</modFrete>
+			</transp>
+			<pag>
+				<detPag>
+					<tPag>01</tPag>
+					<vPag>20.18</vPag>
+				</detPag>
+				<vTroco>9.00</vTroco>
+			</pag>
+			<infAdic>
+				<infCpl>Valor Pago: 29,18 | | Valor Troco: 9,00 | |</infCpl>
+			</infAdic>
+			<infRespTec>
+				<CNPJ>08103165000109</CNPJ>
+				<xContato>Elizio Antonio de Rezende</xContato>
+				<email>atendimento@safewaretecnologia.com</email>
+				<fone>6237022602</fone>
+			</infRespTec>
+		</infNFe>
+		<infNFeSupl>
+			<qrCode>http://nfe.sefaz.go.gov.br/nfeweb/sites/nfce/danfeNFCe?p=52230529637827000192650010002544511845048272|2|1|1|A184279627EC23A342630F9602330B188E72C03B</qrCode>
+			<urlChave>http://www.sefaz.go.gov.br/nfce/consulta</urlChave>
+		</infNFeSupl>
+		<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+			<SignedInfo>
+				<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+				<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+				<Reference URI="#NFe52230529637827000192650010002544511845048272">
+					<Transforms>
+						<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+						<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+					</Transforms>
+					<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+					<DigestValue>An6lQ7hbducvsoB54ToS1caIQ7M=</DigestValue>
+				</Reference>
+			</SignedInfo>
+			<SignatureValue>WQnG7DvkZmg1sOgWTmNTa4V2ydeTO6IuFEDqnvvMvdMKArKXkkjlNkFxx6J5KwOnZrW22z6lfnCRrPSsLUy8jZRczLSAI6HkIgvUdl4XQyABYvqbGYAc0QO5+Ld4zxIpqlF8hHKE86vHlKcX8uxlyDJlLpWd7OY6d5DEn5mnMb0Sq9OXryLIMY2aZU0ZQS8Qb7CWlc2mnXU6ZSM02VLfs6AhFng4MPxrWKjsW173Cjq7ZAdpWySJZN8DlC7C4UuMeU6OF8IKtZ6UqfXpDB6nrsLjBkiGwdIVIhPdQwmFr1gx9PCgC2BuzdmqoLW5ooBkpGRH4zfeUY9NzHYE9DX1sA==</SignatureValue>
+			<KeyInfo>
+				<X509Data>
+					<X509Certificate>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</X509Certificate>
+				</X509Data>
+			</KeyInfo>
+		</Signature>
+	</NFe>
+	<protNFe versao="4.00">
+		<infProt>
+			<tpAmb>1</tpAmb>
+			<verAplic>GO4.0</verAplic>
+			<chNFe>52230529637827000192650010002544511845048272</chNFe>
+			<dhRecbto>2023-05-12T11:34:24-03:00</dhRecbto>
+			<nProt>152236282143054</nProt>
+			<digVal>An6lQ7hbducvsoB54ToS1caIQ7M=</digVal>
+			<cStat>100</cStat>
+			<xMotivo>Autorizado o uso da NF-e</xMotivo>
+		</infProt>
+	</protNFe>
+</nfeProc>

@@ -1,35 +1,45 @@
 from lxml import etree
 import pathlib
-import xml.etree.ElementTree as ET
 
 WORKING_DIR = str(pathlib.Path().resolve())
 SCRIPT_DIR = str(pathlib.Path(__file__).parent.resolve())
 
-xml = etree.parse(SCRIPT_DIR + '/nfe.xml')
+schema_file = '/schemas/'
 
-xml2 = etree.parse(SCRIPT_DIR + '/nfe2.xml')
+xml = etree.parse(SCRIPT_DIR + '/nfe.xml')
 
 xml_root = xml.getroot()
 
-xml_root2 = xml2.getroot()
+if xml_root.tag.__contains__('consReciNFe'):
+    schema_file += 'consReciNFe_v4.00.xsd'
+elif xml_root.tag.__contains__('consSitNFe'):
+    schema_file += 'consSitNFe_v4.00.xsd'
+elif xml_root.tag.__contains__('consStatServ'):
+    schema_file += 'consStatServ_v4.00.xsd'
+elif xml_root.tag.__contains__('enviNFe'):
+    schema_file += 'enviNFe_v4.00.xsd'
+elif xml_root.tag.__contains__('inutNFe'):
+    schema_file += 'inutNFe_v4.00.xsd'
+elif xml_root.tag.__contains__('NFe'):
+    schema_file += 'nfe_v4.00.xsd'
+elif xml_root.tag.__contains__('ProcInutNFe'):
+    schema_file += 'procInutNFe_v4.00.xsd'
+elif xml_root.tag.__contains__('nfeProc'):
+    schema_file += 'procNFe_v4.00.xsd'
+elif xml_root.tag.__contains__('retConsReciNFe'):
+    schema_file += 'retConsReciNFe_v4.00.xsd'
+elif xml_root.tag.__contains__('retConsSitNFe'):
+    schema_file += 'retConsSitNFe_v4.00.xsd'
+elif xml_root.tag.__contains__('retConsStatServ'):
+    schema_file += 'retConsStatServ_v4.00.xsd'
+elif xml_root.tag.__contains__('retEnviNFe'):
+    schema_file += 'retEnviNFe_v4.00.xsd'
+elif xml_root.tag.__contains__('retInutNFe'):
+    schema_file += 'retInutNFe_v4.00.xsd'
+elif xml_root.tag.__contains__('Signature'):
+    schema_file += 'xmldsig-core-schema_v1.01.xsd'
 
-# print(etree.tostring(xml))
-
-# print(xml_root.tag)
-
-xml_schema = etree.XMLSchema(file=SCRIPT_DIR + '/schemas/nfe_v4.00.xsd')
-
-xml_schema2 = etree.XMLSchema(file=SCRIPT_DIR + '/schema.xsd')
-
-# print('Tag raiz do XML: ' + xml_root.tag)
-
-# print(xml_schema.validate(xml))
-
-# if xml_schema.assertValid(xml_root) is None:
-#     print('sucesso')
-
-# if xml_schema2.assertValid(xml2) is None:
-#     print('sucesso 2')
+xml_schema = etree.XMLSchema(file=SCRIPT_DIR + schema_file)
 
 xml_schema.validate(xml)
 
@@ -37,4 +47,7 @@ log = xml_schema.error_log
 
 error = log.last_error
 
-print(error)
+if error:
+    print(error)
+else:
+    print('Validado sem erros')

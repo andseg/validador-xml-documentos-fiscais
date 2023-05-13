@@ -1,9 +1,9 @@
 import xml.etree.ElementTree as ET
 from django.shortcuts import render
-from validador.rulesXML import validator_rules, rules_recebimentos
+from validador.rulesXML import validator_rules, rules_recebimentos, walks_xml
 from .forms import UploadFileForm
 from datetime import datetime
-
+import re
 
 def validadorxml(request, infor):
     return render(request, "validador/validadorxml.html", infor)
@@ -107,6 +107,8 @@ def index(request):
                     pagamento = pag.find('ns:vPag', nsNFE)
                     recebimento.append(float(pagamento.text))
                 erro_pagamento = rules_recebimentos(recebimento, float(valor_total.text))
+                xml_sem_namespace = re.sub(b'ns0:', b'', xml)
+                xml_sem_namespace_format = xml_sem_namespace.decode('utf-8')
                 infor = {
                     'metodo': request.method,
                     'form': form,
@@ -118,13 +120,14 @@ def index(request):
                     'CNPJ_Destinatario': cnpj_dest_nfe_format,
                     'Chave_de_Acesso': chave_nfc,
                     'produtos': produtos,
-                    'xml': xml,
+                    'xml': xml_sem_namespace_format,
                     'modelo': modelo_nfe.text,
                     'alq_validado': alq_validado,
                     'erro_pagamento': erro_pagamento,
                     'data': data_formatada
                 }
-                return validadorxml(request, infor)
+                walks_xml(file, caminho)
+                return render(request, "validador/validadorxml.html", infor)
 
             elif modelo_nfe.text == '65':
                 serie_nfc = root.find(caminho + 'ns:ide/ns:serie', nsNFE)
@@ -191,7 +194,8 @@ def index(request):
                 erro_pagamento = rules_recebimentos(recebimento, float(valor_total.text))
                 valor_tribut = root.find(caminho + 'ns:total/ns:ICMSTot/ns:vTotTrib', nsNFE)
                 alq_validado = validator_rules(emit_uf.text, emit_uf.text, modelo_nfe.text, float(valor_total.text), lista_alq_produto_nfc, float(valor_tribut.text))
-
+                xml_sem_namespace = re.sub(b'ns0:', b'', xml)
+                xml_sem_namespace_format = xml_sem_namespace.decode('utf-8')
                 infor = {
                     'metodo': request.method,
                     'form': form,
@@ -201,12 +205,13 @@ def index(request):
                     'CNPJ_Emitente': cnpj_emit_nfc_format,
                     'Chave_de_Acesso': chave_nfc,
                     'produtos': produtos,
-                    'xml': xml,
+                    'xml': xml_sem_namespace_format,
                     'modelo': modelo_nfe.text,
                     'alq_validado': alq_validado,
                     'erro_pagamento': erro_pagamento,
                     'data': data_formatada
                 }
+                walks_xml(file, caminho)
                 return render(request, "validador/validadorxml.html", infor)
     else:
         form = UploadFileForm()

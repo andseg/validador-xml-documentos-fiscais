@@ -196,3 +196,7 @@ cython_debug/
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode
+
+# NF-e usada para teste
+# NUNCA ENVIAR ESSA NF-E PARA O GITHUB. DEIXE A NFE NO .gitignore
+validador/nfe.xml

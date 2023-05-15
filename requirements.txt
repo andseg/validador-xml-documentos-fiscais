@@ -6,3 +6,4 @@ tzdata
 gunicorn
 pandas
 openpyxl
+xmlschema

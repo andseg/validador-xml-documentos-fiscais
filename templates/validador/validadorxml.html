@@ -11,7 +11,7 @@
         <script>
             function xml_info(){
                 var xml = document.querySelector('.textInfo');
-                xml.innerHTML='' + '<pre>{{ xml }}</pre>' + '</div>'
+                xml.innerHTML='' + '<pre>{{ xml }}</pre>'
             }
 
             function error_info(){
@@ -43,13 +43,13 @@
             {{ form }}
             <input class="envio" type="submit" value="Enviar">
         </form>
-        {% if metodo == 'POST' %}
             <div class="divButton">
                 <button onclick="xml_info()" class="buttonXml"> XML </button>
                 <button onclick="error_info()" class="buttonErro"> Erros </button>
                 <button onclick="product_info()" class="buttonProduct"> Produtos </button>
                 <button onclick="info_nf()" class="buttonInfo"> Geral </button>
             </div>
+        {% if metodo == 'POST' %}
             <div class="mostraXML" id="xml">
                 <div class="textInfo">
                     <pre>{{ xml }}</pre>

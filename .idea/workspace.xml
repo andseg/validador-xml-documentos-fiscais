@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a5280a35-bd46-4c88-a6a3-d5894f7e4bbe" name="Changes" comment="'Testando Commit Development'">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/validador/validadorxml.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/validador/validadorxml.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/validador/rulesXML.py" beforeDir="false" afterPath="$PROJECT_DIR$/validador/rulesXML.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/validador/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/validador/views.py" afterDir="false" />
     </list>
@@ -179,7 +180,7 @@
       <workItem from="1683562820641" duration="30154000" />
       <workItem from="1683662835474" duration="1384000" />
       <workItem from="1683915279741" duration="7730000" />
-      <workItem from="1683983622831" duration="5546000" />
+      <workItem from="1683983622831" duration="12670000" />
     </task>
     <task id="LOCAL-00001" summary="'Testando Commit Development'">
       <created>1683215227658</created>

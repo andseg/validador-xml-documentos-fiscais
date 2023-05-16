@@ -40,11 +40,11 @@ def validate_schema(file):
     
     xml_schema = etree.XMLSchema(file=SCRIPT_DIR + schema_path)
 
-    # xml_schema.validate(xml)
+    xml_schema.validate(xml)
 
-    # log = xml_schema.error_log
+    log = xml_schema.error_log
 
-    # error = log.last_error
+    error = log.last_error
     
     if not xml_schema(xml):
         response = xml_schema.error_log.last_error

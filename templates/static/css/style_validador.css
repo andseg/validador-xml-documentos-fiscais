@@ -1,0 +1,125 @@
+body {
+    background: silver;
+}
+
+.tittle {
+    color: indigo;
+    text-align: center;
+    font-size: 24px;
+}
+
+.envio {
+    background: ivory;
+    border-radius: 15%;
+    width: 68px;
+}
+
+.divButton {
+    margin-top: 2vw;
+    background: cadetblue;
+    width: 35vw;
+    border-top-right-radius: 1vw;
+}
+
+.buttonXml {
+    width: 5vw;
+    height: 2vw;
+    margin-left: 1vw;
+    border-radius: 0.5vw;
+}
+
+.buttonErro {
+    width: 5vw;
+    height: 2vw;
+    border-radius: 0.5vw;
+    margin-left: 1vw;
+}
+
+.buttonProduct {
+    width: 5vw;
+    height: 2vw;
+    border-radius: 0.5vw;
+    margin-left: 1vw;
+}
+
+.buttonInfo{
+    width: 5vw;
+    height: 2vw;
+    border-radius: 0.5vw;
+    margin-left: 1vw;
+}
+
+.mostraXML {
+    background: ivory;
+    height: 20vw;
+    overflow-y: scroll;
+    overflow-x: auto;
+    width: 100%;
+    border-style: double;
+}
+
+.textInfo {
+    margin-left: 1vw;
+}
+
+.infoEmit {
+    margin-top: 1vw;
+    background: ivory;
+    border-radius: 1vw;
+    width: 100%;
+    height: 100%;
+}
+
+.infoEmiteStyle {
+    font-size: 14px;
+    margin-left: 2vw;
+}
+
+
+
+
+
+.infoDest {
+    margin-top: 0.5vw;
+    background: #e8e8e8;
+    border-radius: 2vw;
+    width: 55vw;
+    height: 100%;
+}
+
+.inforDestStyle {
+    font-size: 14px;
+    margin-left: 2vw;
+}
+
+
+{% if modelo == '55' %}
+.produtos {
+    margin-top: -43vw;
+    background: #e8e8e8;
+    border-radius: 2vw;
+    width: 40vw;
+    height: 38.5vw;
+    margin-left: 57.5vw;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+{% endif %}
+
+{% if modelo == '65' %}
+.produtos {
+    margin-top: -35.5vw;
+    background: #e8e8e8;
+    border-radius: 2vw;
+    width: 40vw;
+    height: 38.5vw;
+    margin-left: 57.5vw;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+{% endif %}
+
+.produtoStyle {
+    font-size: 14px;
+    margin-left: 2vw;
+}

@@ -1,9 +1,10 @@
 import xml.etree.ElementTree as ET
 from django.shortcuts import render
-import validador.rulesXML
+import validador.rulesXML as rules
 from .forms import UploadFileForm
 from datetime import datetime
 import re
+from validate_schema import validate_schema
 
 def validadorxml(request, infor):
     return render(request, "validador/validadorxml.html", infor)
@@ -19,11 +20,11 @@ def index(request):
             nsNFE = {
                 'ns': "http://www.portalfiscal.inf.br/nfe"
             }
-            caminho = validador.rulesXML.best_way(file)
+            caminho = rules.best_way(file)
 
             modelo_nfe = root.find(caminho + 'ns:ide/ns:mod', nsNFE)
             # VALIDAÇÃO DO TIPO DE NOTA FISCAL
-            infor = validador.rulesXML.tipo_nota(file, caminho, modelo_nfe)
+            infor = rules.tipo_nota(file, caminho, modelo_nfe)
             infor['metodo'] = request.method
             infor['form'] = form
             return render(request, "validador/validadorxml.html", infor)

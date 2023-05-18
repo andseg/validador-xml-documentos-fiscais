@@ -321,6 +321,8 @@ def validate_schema(file):
             schema_path += 'retInutNFe_v4.00.xsd'
         elif xml_root.tag.__contains__('Signature'):
             schema_path += 'xmldsig-core-schema_v1.01.xsd'
+        else:
+            raise Exception('Schema não identificado. Verificar se o XML é referente a um documento fiscal')
         
         xml_schema = ET.XMLSchema(file=SCRIPT_DIR + schema_path)
 
@@ -328,8 +330,8 @@ def validate_schema(file):
 
         # log = xml_schema.error_log
 
-
         xml_schema.assertValid(xml)
+        
     except Exception as e:
         print(type(e).__name__ + " - " + str(e))
         # err_string = type(e).__name__ + " - " + str(e)

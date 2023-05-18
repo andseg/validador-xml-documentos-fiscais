@@ -49,3 +49,12 @@ error_type = error.type_name
 print(error.type_name)
 
 print('ERROR:'+error_domain+':'+error_type+':'+err)
+
+file_teste = open('C:/Users/Dev/Andre/validador-xml-documentos-fiscais/nfe.xml', 'r')
+xml_teste = etree.parse(file_teste)
+file_teste.close()
+xml_teste_root = xml_teste.getroot()
+for element in xml_teste_root.iter(tag=etree.Element):
+    tag = element.tag[element.tag.find('}')+1:]
+    if tag == 'mod':
+        modelo = element.text

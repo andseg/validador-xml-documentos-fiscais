@@ -6,6 +6,7 @@ SCRIPT_DIR = str(pathlib.Path(__file__).parent.resolve())
 
 def validate_schema(file):
     schema_path = '/schemas/'
+    file = open('C:/Users/Dev/Andre/validador-xml-documentos-fiscais/validador/nfe.xml','r')
     xml = etree.parse(file)
     xml_root = xml.getroot()
     
@@ -40,16 +41,24 @@ def validate_schema(file):
     
     xml_schema = etree.XMLSchema(file=SCRIPT_DIR + schema_path)
 
-    xml_schema.validate(xml)
+    # valid = xml_schema.validate(xml)
 
-    log = xml_schema.error_log
+    # log = xml_schema.error_log
 
-    error = log.last_error
+    err = Exception()
+    try:
+        xml_schema.assertValid(xml)
+    except Exception as e:
+        print(type(e).__name__ + " - " + str(e))
+        err_string = type(e).__name__ + " - " + str(e)
+        err = e
     
-    if not xml_schema(xml):
-        response = xml_schema.error_log.last_error
+    log = xml_schema.error_log
+    error = log.last_error
+    if error is not None:
+        error_domain = error.domain_name
+        print(error.domain_name)
+        error_type = error.type_name
+        print(error.type_name)
 
-    if error:
-        print(error)
-    else:
-        print('Validado sem erros')
+        print('ERROR:'+error_domain+':'+error_type+':'+err_string)

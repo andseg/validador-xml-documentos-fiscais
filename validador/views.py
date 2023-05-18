@@ -1,11 +1,10 @@
-import xml.etree.ElementTree as ET
-from lxml import etree
+# import xml.etree.ElementTree as ET
+from lxml import etree as ET
 from django.shortcuts import render
 import validador.rulesXML as rules
 from .forms import UploadFileForm
 from datetime import datetime
 import re
-from .validate_schema import validate_schema
 
 def validadorxml(request, infor):
     return render(request, "validador/validadorxml.html", infor)
@@ -15,9 +14,8 @@ def index(request):
     if request.method == "POST":
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            f = request.FILES["file"]
-            file = ET.parse(f)
-            validate_schema(file)
+            # xml, xml_root, e = rules.validate_schema(request.FILES["file"])
+            file = ET.parse(request.FILES["file"])
             root = file.getroot()
 
             nsNFE = {

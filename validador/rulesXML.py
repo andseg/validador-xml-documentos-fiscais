@@ -45,7 +45,6 @@ def validator_rules_65(origin, vnf, alq_nfe, valor_tribt):
                     alq_validado = 'Encontrado inconsistência no ICMS'
                     return alq_validado
 
-
 def rules_receipts(vpag, vnf):
     valor_total = sum(vpag)
     if valor_total != vnf:
@@ -119,6 +118,16 @@ def cnpj_cpf(root, caminho, nsNFE):
             return dest_name, cnpj_dest_format, cpf_dest_format
 
 
+def local_emit(root, caminho, nsNFE):
+    emit_uf = root.find(caminho + 'ns:emit/ns:enderEmit/ns:UF', nsNFE)
+    return emit_uf
+
+
+def local_dest(root, caminho, nsNFE):
+    dest_uf = root.find(caminho + 'ns:dest/ns:enderDest/ns:UF', nsNFE)
+    return dest_uf
+
+
 def type_nota(file, caminho, modelo_nfe):
     root = file.getroot()
     nsNFE = {'ns': "http://www.portalfiscal.inf.br/nfe"}
@@ -132,12 +141,13 @@ def type_nota(file, caminho, modelo_nfe):
     cnpj_emit_format = format_cnpj(cnpj_emit)
 
     # Encontrando Estado do Emitente
-    emit_uf = root.find(caminho + 'ns:emit/ns:enderEmit/ns:UF', nsNFE)
+
+    emit_uf = local_emit(root, caminho, nsNFE)
 
     # Validação do Tipo de Cliente (Pode existir ou Não) caso None retorna genérico
     dest_name, cnpj_dest, cpf_dest = cnpj_cpf(root, caminho, nsNFE)
     if cnpj_dest is not None:
-        dest_uf = root.find(caminho + 'ns:dest/ns:enderDest/ns:UF', nsNFE)
+        dest_uf = local_dest(root, caminho, nsNFE)
     else:
         dest_uf = None
 
@@ -316,3 +326,40 @@ def validate_schema(file):
         # print('ERROR:'+error_domain+':'+error_type+':'+err_string)
     finally:
         return xml, xml_root, e
+
+
+def calc_fisco(root, caminho, nsNFE):
+    produtos = []
+    for det in root.findall(caminho + 'ns:det', nsNFE):
+        caminho_icms = det.find('ns:imposto/ICMS/ns:ICMS00/ns:CST', nsNFE)
+        if caminho_icms is not None:
+            caminho_icms = 'ns:imposto/ICMS/ns:ICMS00/'
+        else:
+            caminho_icms = 'ns:imposto/ICMS/ns:ICMS20/'
+
+        cst = det.find(caminho_icms + 'ns:CST', nsNFE)
+        valor_bc = det.find(caminho_icms + 'ns:vBC', nsNFE)
+        picms = det.find(caminho_icms + 'ns:pICMS', nsNFE)
+        vicms = det.find(caminho_icms + 'ns:vICMS', nsNFE)
+        vprod = det.find(caminho + 'ns:prod/ns:vProd', nsNFE)
+        produto = {
+            'cst': cst,
+            'valor_base': valor_bc.text,
+            'alq_icms': picms,
+            'valor_icms': vicms.text,
+            'valor_prod': vprod.text
+        }
+        produtos.append(produto)
+
+    base_tot = 0
+    alq_icms = 0
+    for produto in produtos:
+        base_tot = float(produto['valor_base']) + base_tot
+        if float(produto['alq_icms'].text) == 0:
+            valida_uf_emit = local_emit(root, caminho, nsNFE)
+
+
+
+
+
+

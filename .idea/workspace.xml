@@ -73,7 +73,7 @@
       <recent name="C:\Users\Unika Sistemas\IdeaProjects\validador-xml-documentos-fiscais2\validador" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.handler">
+  <component name="RunManager" selected="Python.views">
     <configuration name="handler" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="validador-xml-documentos-fiscais2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -189,7 +189,7 @@
       <workItem from="1684326739304" duration="367000" />
       <workItem from="1684411922280" duration="115000" />
       <workItem from="1684414340511" duration="14073000" />
-      <workItem from="1684439886841" duration="9111000" />
+      <workItem from="1684439886841" duration="14389000" />
     </task>
     <task id="LOCAL-00001" summary="'Testando Commit Development'">
       <created>1683215227658</created>
@@ -232,6 +232,7 @@
     <option name="LAST_COMMIT_MESSAGE" value="'Testando Commit Development'" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/validador_xml_documentos_fiscais3$views.coverage" NAME="views Coverage Results" MODIFIED="1684506100649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/validador" />
     <SUITE FILE_PATH="coverage/validador_xml_documentos_fiscais2$views.coverage" NAME="views Coverage Results" MODIFIED="1683569687240" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/validador" />
     <SUITE FILE_PATH="coverage/validador_xml_documentos_fiscais2$rulesXML.coverage" NAME="rulesXML Coverage Results" MODIFIED="1683297312852" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/validador/rules" />
     <SUITE FILE_PATH="coverage/validador_xml_documentos_fiscais2$handler.coverage" NAME="handler Coverage Results" MODIFIED="1683296202944" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/validador" />

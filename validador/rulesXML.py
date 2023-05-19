@@ -8,25 +8,23 @@ WORKING_DIR = str(pathlib.Path().resolve())
 SCRIPT_DIR = str(pathlib.Path(__file__).parent.resolve())
 
 
-def validator_rules(origin, dest, mod, vnf, alq_nfe, valor_tribt):
+def validator_rules_55(origin, dest, alq_nfe, valor_tribt):
     alq_icms = pd.read_excel("./validador/aliquotas/aliquotaICMS.xlsx", index_col=0)
     alq = alq_icms.loc[origin, dest]
-    if mod == '55':
-        for aliquota in alq_nfe:
-            if float(aliquota.replace(" ' ", "")) != 0:
-                if float(aliquota.replace(" ' ", "")) == alq:
-                    alq_validado = 'Alíquota ICMS Correta ' + origin + '-' + dest + ' Alíquota: ' + str(alq) + '%'
-                    return alq_validado
-                else:
-                    alq_validado = 'Alíquota ICMS utilizado:' + aliquota + '%' + '  Origem: ' + origin + '  Destino: ' + dest + ' O correto seria: ' + str(
-                        alq) + '%'
-                    return alq_validado
-            else:
-
-                alq_validado = 'Inconsistência Encontrada não existe pICMS no arquivo'
+    for aliquota in alq_nfe:
+        if float(aliquota.replace(" ' ", "")) != 0:
+            if float(aliquota.replace(" ' ", "")) == alq:
+                alq_validado = 'Alíquota ICMS Correta ' + origin + '-' + dest + ' Alíquota: ' + str(alq) + '%'
                 return alq_validado
+            else:
+                 alq_validado = 'Alíquota ICMS utilizado:' + aliquota + '%' + '  Origem: ' + origin + '  Destino: ' + dest + ' O correto seria: ' + str(
+                        alq) + '%'
+                 return alq_validado
+        else:
+            alq_validado = 'Inconsistência Encontrada não existe pICMS no arquivo'
+            return alq_validado
 
-    else:
+def validator_rules_65(origin, vnf, alq_nfe, valor_tribt):
         alq_icms = pd.read_excel("./validador/aliquotas/aliquotaICMS.xlsx", index_col=0)
         alq = alq_icms.loc[origin, origin]
         for aliquota in alq_nfe:
@@ -35,7 +33,7 @@ def validator_rules(origin, dest, mod, vnf, alq_nfe, valor_tribt):
                     alq_validado = 'Alíquota ICMS Correta ' + origin + ' Alíquota: ' + str(alq) + '%'
                     return alq_validado
                 else:
-                    alq_validado = 'Alíquota ICMS utilizado:' + aliquota + '%' + '  Origem: ' + origin + '  Destino: ' + dest + ' o correto seria: ' + str(
+                    alq_validado = 'Alíquota ICMS utilizado:' + aliquota + '%' + '  Origem: ' + origin + '  Destino: ' + origin + ' o correto seria: ' + str(
                         alq) + '%'
                     return alq_validado
             else:
@@ -52,11 +50,12 @@ def rules_receipts(vpag, vnf):
     valor_total = sum(vpag)
     if valor_total != vnf:
         diferenca = valor_total - vnf
-        retorno = ('vPag Erro   ' + 'Valor Total = R$' + str(vnf) + '   Valor Pago = R$' + str(
+        retorno = ('Encontrado Erro quanto a Informação de Pagamento   ' + 'Valor Total = R$' + str(
+            vnf) + '   Valor Pago = R$' + str(
             valor_total) + '    Diferença = R$' + str(diferenca))
         return retorno
     else:
-        retorno = 'vPag - OK'
+        retorno = 'Informação de Pagamento - OK'
         return retorno
 
 
@@ -190,15 +189,12 @@ def type_nota(file, caminho, modelo_nfe):
         }
         produtos.append(produto)
 
-    # Perco
-
     # Percorrendo e armazenando as informações de Pagamento disponíveis
     valor_total = root.find(caminho + 'ns:total/ns:ICMSTot/ns:vNF', nsNFE)
     recebimento = []
     for pag in root.findall(caminho + 'ns:pag/ns:detPag', nsNFE):
         pagamento = pag.find('ns:vPag', nsNFE)
         recebimento.append(float(pagamento.text))
-    erro_pagamento = rules_receipts(recebimento, float(valor_total.text))
 
     # Inserção de Regras
     erro_pagamento = rules_receipts(recebimento, float(valor_total.text))
@@ -209,12 +205,16 @@ def type_nota(file, caminho, modelo_nfe):
     op = operation_mov(file, caminho)
     infcpl = inform_tributos(file, caminho)
     valor_tribut = root.find(caminho + 'ns:total/ns:ICMSTot/ns:vTotTrib', nsNFE)
-    if valor_tribut is None:
-        valor_tribut = 0
-        alq_validado = validator_rules(emit_uf.text, dest_uf.text, modelo_nfe.text, float(valor_total.text),
-                                       lista_alq_produto, float(valor_tribut))
+    if dest_uf is not None:
+        if valor_tribut is not None:
+            alq_validado = validator_rules_55(emit_uf.text, dest_uf.text,
+                                           lista_alq_produto, float(valor_tribut))
+        else:
+            valor_tribut = 0
+            alq_validado = validator_rules_55(emit_uf.text, dest_uf.text,
+                                              lista_alq_produto, float(valor_tribut))
     else:
-        alq_validado = validator_rules(emit_uf.text, dest_uf.text, modelo_nfe.text, float(valor_total.text),
+        alq_validado = validator_rules_65(emit_uf.text, float(valor_total.text),
                                        lista_alq_produto, float(valor_tribut.text))
 
     if modelo_nfe.text == '65':

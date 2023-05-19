@@ -25,7 +25,7 @@ def index(request):
 
             modelo_nfe = root.find(caminho + 'ns:ide/ns:mod', nsNFE)
             # VALIDAÇÃO DO TIPO DE NOTA FISCAL
-            infor = rules.tipo_nota(file, caminho, modelo_nfe)
+            infor = rules.type_nota(file, caminho, modelo_nfe)
             infor['metodo'] = request.method
             infor['form'] = form
             return render(request, "validador/validadorxml.html", infor)

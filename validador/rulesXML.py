@@ -1,28 +1,11 @@
 import pathlib
 import pandas as pd
-import xml.dom.minidom
 from lxml import etree as ET
 import re
 from datetime import datetime
 
 WORKING_DIR = str(pathlib.Path().resolve())
 SCRIPT_DIR = str(pathlib.Path(__file__).parent.resolve())
-
-
-def walks_xml(file, caminho):
-    root = file.getroot()
-    nsNFE = {'ns': "http://www.portalfiscal.inf.br/nfe"}
-    lista_de_tags = []
-    for tag in root.findall(caminho, nsNFE):
-        nome_tag = tag.tag.split('}')[1]
-        nome_tag_sem_namespace = nome_tag.replace('{http://www.portalfiscal.inf.br/nfe}', '')
-        dados_tag = ET.tostring(tag, encoding='utf-8').decode('utf-8')
-        tags = {'tag': f'<{nome_tag_sem_namespace}>{dados_tag}</{nome_tag_sem_namespace}>'}
-        lista_de_tags.append(tags)
-    for item in lista_de_tags:
-        tag_formatada = item['tag'].replace('{http://www.portalfiscal.inf.br/nfe}', '')
-        dom = xml.dom.minidom.parseString(tag_formatada)
-        xml_formatado = dom.toprettyxml(indent='  ')
 
 
 def validator_rules(origin, dest, mod, vnf, alq_nfe, valor_tribt):
@@ -65,7 +48,7 @@ def validator_rules(origin, dest, mod, vnf, alq_nfe, valor_tribt):
                     return alq_validado
 
 
-def rules_recebimentos(vpag, vnf):
+def rules_receipts(vpag, vnf):
     valor_total = sum(vpag)
     if valor_total != vnf:
         diferenca = valor_total - vnf
@@ -88,106 +71,161 @@ def best_way(file):
     return caminho
 
 
-def operacao_mov(file, caminho):
+def operation_mov(file, caminho):
     root = file.getroot()
     nsNFE = {'ns': "http://www.portalfiscal.inf.br/nfe"}
     tipo_operacao = root.find(caminho + 'ns:ide/ns:natOp', nsNFE)
     return tipo_operacao.text
 
 
-def tipo_nota(file, caminho, modelo_nfe):
-    if modelo_nfe.text == '55':
-        root = file.getroot()
-        nsNFE = {'ns': "http://www.portalfiscal.inf.br/nfe"}
-        xml = ET.tostring(root, encoding='UTF-8', method='xml')
-        serie_nfe = root.find(caminho + 'ns:ide/ns:serie', nsNFE)
-        numero_nfe = root.find(caminho + 'ns:ide/ns:nNF', nsNFE)
+def inform_tributos(file, caminho):
+    root = file.getroot()
+    nsNFE = {'ns': "http://www.portalfiscal.inf.br/nfe"}
+    infCpl = root.find(caminho + 'ns:infAdic/ns:infCpl', nsNFE)
+    return infCpl
 
-        dest_nfe = root.find(caminho + 'ns:dest/ns:xNome', nsNFE)
-        emitente_nfe = root.find(caminho + 'ns:emit/ns:xNome', nsNFE)
 
-        cnpj_emit_nfe = root.find(caminho + 'ns:emit/ns:CNPJ', nsNFE)
-        cnpj_dest_nfe = root.find(caminho + 'ns:dest/ns:CNPJ', nsNFE)
-        data_emi = root.find(caminho + 'ns:ide/ns:dhEmi', nsNFE)
-        data_objeto = datetime.fromisoformat(data_emi.text)
-        data_formatada = data_objeto.strftime("%d-%m-%Y %H:%M")
-        fisico = False
-        if cnpj_dest_nfe is None:
-            fisico = True
-            cnpj_dest_nfe = root.find(caminho + 'ns:dest/ns:CPF', nsNFE)
+def format_cnpj(cnpj):
+    cnpj_format = '{}.{}.{}/{}-{}'.format(cnpj.text[:2], cnpj.text[2:5],
+                                          cnpj.text[5:8], cnpj.text[8:12],
+                                          cnpj.text[12:])
+    return cnpj_format
 
-        # Para fins de validação
-        emit_uf = root.find(caminho + 'ns:emit/ns:enderEmit/ns:UF', nsNFE)
-        det_uf = root.find(caminho + 'ns:dest/ns:enderDest/ns:UF', nsNFE)
-        lista_alq_produto = []
-        for det in root.findall(caminho + 'ns:det', nsNFE):
-            alq_icms_nfe = det.find('ns:imposto/ns:ICMS/ns:ICMS20/ns:pICMS', nsNFE)
-            if alq_icms_nfe is not None:
-                lista_alq_produto.append(alq_icms_nfe.text)
+
+def format_cpf(cpf):
+    cpf_format = '{}.{}.{}-{}'.format(cpf.text[:3], cpf.text[3:5],
+                                      cpf.text[5:8], cpf.text[11:])
+    return cpf_format
+
+
+def cnpj_cpf(root, caminho, nsNFE):
+    cnpj_dest = root.find(caminho + 'ns:dest/ns:CNPJ', nsNFE)
+    if cnpj_dest is not None:
+        dest_name = root.find(caminho + 'ns:dest/ns:xNome', nsNFE)
+        cnpj_dest_format = format_cnpj(cnpj_dest)
+        cpf_dest_format = None
+        return dest_name.text, cnpj_dest_format, cpf_dest_format
+
+    else:
+        cpf_dest = root.find(caminho + 'ns:dest/ns:CPF', nsNFE)
+        if cpf_dest is not None:
+            dest_name = root.find(caminho + 'ns:dest/ns:xNome', nsNFE)
+            cpf_dest_format = format_cpf(cpf_dest)
+            cnpj_dest_format = None
+            return dest_name.text, cnpj_dest_format, cpf_dest_format
+        else:
+            dest_name = 'Consumidor Final'
+            cpf_dest_format = '000.000.000-00'
+            cnpj_dest_format = None
+            return dest_name, cnpj_dest_format, cpf_dest_format
+
+
+def type_nota(file, caminho, modelo_nfe):
+    root = file.getroot()
+    nsNFE = {'ns': "http://www.portalfiscal.inf.br/nfe"}
+
+    # Validação de Informações Comuns entre os arquivos
+    xml = ET.tostring(root, encoding='UTF-8', method='xml')
+    serie = root.find(caminho + 'ns:ide/ns:serie', nsNFE)
+    numero = root.find(caminho + 'ns:ide/ns:nNF', nsNFE)
+    emitente = root.find(caminho + 'ns:emit/ns:xNome', nsNFE)
+    cnpj_emit = root.find(caminho + 'ns:emit/ns:CNPJ', nsNFE)
+    cnpj_emit_format = format_cnpj(cnpj_emit)
+
+    # Encontrando Estado do Emitente
+    emit_uf = root.find(caminho + 'ns:emit/ns:enderEmit/ns:UF', nsNFE)
+
+    # Validação do Tipo de Cliente (Pode existir ou Não) caso None retorna genérico
+    dest_name, cnpj_dest, cpf_dest = cnpj_cpf(root, caminho, nsNFE)
+    if cnpj_dest is not None:
+        dest_uf = root.find(caminho + 'ns:dest/ns:enderDest/ns:UF', nsNFE)
+    else:
+        dest_uf = None
+
+    # Informação Comun para validar data
+    data_emi = root.find(caminho + 'ns:ide/ns:dhEmi', nsNFE)
+    data_objeto = datetime.fromisoformat(data_emi.text)
+    data_formatada = data_objeto.strftime("%d-%m-%Y %H:%M")
+
+    # Validando as informações de Alíquota ICMS
+    lista_alq_produto = []
+    for det in root.findall(caminho + 'ns:det', nsNFE):
+        alq_icms = det.find('ns:imposto/ns:ICMS/ns:ICMS20/ns:pICMS', nsNFE)
+        if alq_icms is not None:
+            lista_alq_produto.append(alq_icms.text)
+        else:
+            alq_icms = det.find('ns:imposto/ns:ICMS/ns:ICMS00/ns:pICMS', nsNFE)
+            if alq_icms is not None:
+                lista_alq_produto.append(alq_icms.text)
             else:
-                alq_icms_nfe = det.find('ns:imposto/ns:ICMS/ns:ICMS00/ns:pICMS', nsNFE)
-                if alq_icms_nfe is not None:
-                    lista_alq_produto.append(alq_icms_nfe.text)
-                else:
-                    alq_icms_nfe = '0'
-                    lista_alq_produto.append(alq_icms_nfe)
+                # vTotTrib * 100 / vNf = Aliquota ICMS
+                # total_tributos = det.find('ns:total/ns:ICMSTot/ns:vTotTrib', nsNFE)
+                # alq_icms = (float(total_tributos.text) * 100) / float(valor_total.text)
+                alq_icms = '0'
+                lista_alq_produto.append(alq_icms)
 
-        chave_nfc = root.find('ns:infNFe', nsNFE)
-        if chave_nfc is None:
-            chave_nfc = root.find('ns:NFe/ns:infNFe', nsNFE).attrib['Id'][3:]
-        else:
-            chave_nfc = chave_nfc.attrib['Id'][3:]
+    # Buscando a chave de acesso
+    chave_acesso = root.find('ns:infNFe', nsNFE)
+    if chave_acesso is None:
+        chave_acesso = root.find('ns:NFe/ns:infNFe', nsNFE).attrib['Id'][3:]
+    else:
+        chave_acesso = chave_acesso.attrib['Id'][3:]
 
-        cnpj_emit_nfe_format = '{}.{}.{}/{}-{}'.format(cnpj_emit_nfe.text[:2], cnpj_emit_nfe.text[2:5],
-                                                       cnpj_emit_nfe.text[5:8], cnpj_emit_nfe.text[8:12],
-                                                       cnpj_emit_nfe.text[12:])
+    # Percorrendo e inserindo me lista os produtos da nota
+    produtos = []
+    for det in root.findall(caminho + 'ns:det', nsNFE):
+        nome_prod = det.find('ns:prod/ns:xProd', nsNFE)
+        item_prod = det.find('ns:prod/ns:vUnCom', nsNFE)
+        item_prod_format = round(float(item_prod.text), 2)
+        codigo_prod = det.find('ns:prod/ns:cProd', nsNFE)
+        valor_prod = det.find('ns:prod/ns:vProd', nsNFE)
+        qtd_prod = det.find('ns:prod/ns:qCom', nsNFE)
+        qtd_prod_format = float(qtd_prod.text)
+        produto = {
+            'codigo': codigo_prod.text,
+            'nome': nome_prod.text,
+            'valor_unitario': item_prod_format,
+            'quantidade': qtd_prod_format,
+            'valor_total': valor_prod.text
+        }
+        produtos.append(produto)
 
-        if not fisico:
-            cnpj_dest_nfe_format = '{}.{}.{}/{}-{}'.format(cnpj_dest_nfe.text[:2], cnpj_dest_nfe.text[2:5],
-                                                           cnpj_dest_nfe.text[5:8], cnpj_dest_nfe.text[8:12],
-                                                           cnpj_dest_nfe.text[12:])
-        else:
-            cnpj_dest_nfe_format = '{}.{}.{}-{}'.format(cnpj_dest_nfe.text[:3], cnpj_dest_nfe.text[3:5],
-                                                        cnpj_dest_nfe.text[5:8], cnpj_dest_nfe.text[11:])
+    # Perco
 
-        produtos = []
+    # Percorrendo e armazenando as informações de Pagamento disponíveis
+    valor_total = root.find(caminho + 'ns:total/ns:ICMSTot/ns:vNF', nsNFE)
+    recebimento = []
+    for pag in root.findall(caminho + 'ns:pag/ns:detPag', nsNFE):
+        pagamento = pag.find('ns:vPag', nsNFE)
+        recebimento.append(float(pagamento.text))
+    erro_pagamento = rules_receipts(recebimento, float(valor_total.text))
 
-        for det in root.findall(caminho + 'ns:det', nsNFE):
-            nome_prod_nfe = det.find('ns:prod/ns:xProd', nsNFE)
-            item_prod_nfe = det.find('ns:prod/ns:vUnCom', nsNFE)
-            item_prod_format = round(float(item_prod_nfe.text), 2)
-            codigo_prod_nfe = det.find('ns:prod/ns:cProd', nsNFE)
-            valor_prod_nfe = det.find('ns:prod/ns:vProd', nsNFE)
-            qtd_prod_nfe = det.find('ns:prod/ns:qCom', nsNFE)
-            qtd_prod_format = round(float(qtd_prod_nfe.text))
-            produto = {
-                'codigo': codigo_prod_nfe.text,
-                'nome': nome_prod_nfe.text,
-                'valor_unitario': item_prod_format,
-                'quantidade': qtd_prod_format,
-                'valor_total': valor_prod_nfe.text,
-            }
-            produtos.append(produto)
-        valor_total = root.find(caminho + 'ns:total/ns:ICMSTot/ns:vNF', nsNFE)
-        valor_tribut = root.find(caminho + 'ns:total/ns:ICMSTot/ns:vTotTrib', nsNFE)
-        alq_validado = validator_rules(emit_uf.text, det_uf.text, modelo_nfe.text, float(valor_total.text),
+    # Inserção de Regras
+    erro_pagamento = rules_receipts(recebimento, float(valor_total.text))
+    xml_sem_namespace = re.sub(b'ns0:', b'', xml)
+    xml_sem_namespace_format = xml_sem_namespace.decode('utf-8')
+
+    # Inicio de informações Fiscais
+    op = operation_mov(file, caminho)
+    infcpl = inform_tributos(file, caminho)
+    valor_tribut = root.find(caminho + 'ns:total/ns:ICMSTot/ns:vTotTrib', nsNFE)
+    if valor_tribut is None:
+        valor_tribut = 0
+        alq_validado = validator_rules(emit_uf.text, dest_uf.text, modelo_nfe.text, float(valor_total.text),
+                                       lista_alq_produto, float(valor_tribut))
+    else:
+        alq_validado = validator_rules(emit_uf.text, dest_uf.text, modelo_nfe.text, float(valor_total.text),
                                        lista_alq_produto, float(valor_tribut.text))
-        recebimento = []
 
-        for pag in root.findall(caminho + 'ns:pag/ns:detPag', nsNFE):
-            pagamento = pag.find('ns:vPag', nsNFE)
-            recebimento.append(float(pagamento.text))
-        erro_pagamento = rules_recebimentos(recebimento, float(valor_total.text))
-        xml_sem_namespace = re.sub(b'ns0:', b'', xml)
-        xml_sem_namespace_format = xml_sem_namespace.decode('utf-8')
+    if modelo_nfe.text == '65':
         infor = {
-            'Serie': serie_nfe.text,
-            'Numero_da_Nota': numero_nfe.text,
-            'Emitente': emitente_nfe.text,
-            'CNPJ_Emitente': cnpj_emit_nfe_format,
-            'Destinatario': dest_nfe.text,
-            'CNPJ_Destinatario': cnpj_dest_nfe_format,
-            'Chave_de_Acesso': chave_nfc,
+            'Serie': serie.text,
+            'Numero_da_Nota': numero.text,
+            'Emitente': emitente.text,
+            'Chave_de_Acesso': chave_acesso,
+            'CNPJ_Emitente': cnpj_emit_format,
+            'op': op,
+            'infcpl': infcpl.text,
             'produtos': produtos,
             'xml': xml_sem_namespace_format,
             'modelo': modelo_nfe.text,
@@ -195,104 +233,41 @@ def tipo_nota(file, caminho, modelo_nfe):
             'erro_pagamento': erro_pagamento,
             'data': data_formatada
         }
-        return infor
-
-
-    elif modelo_nfe.text == '65':
-        root = file.getroot()
-        nsNFE = {'ns': "http://www.portalfiscal.inf.br/nfe"}
-        xml = ET.tostring(root, encoding='UTF-8', method='xml')
-        serie_nfc = root.find(caminho + 'ns:ide/ns:serie', nsNFE)
-        numero_nfc = root.find(caminho + 'ns:ide/ns:nNF', nsNFE)
-
-        emitente_nfc = root.find(caminho + 'ns:emit/ns:xNome', nsNFE)
-
-        cnpj_emit_nfc = root.find(caminho + 'ns:emit/ns:CNPJ', nsNFE)
-
-        # Para fins de validação
-        emit_uf = root.find(caminho + 'ns:emit/ns:enderEmit/ns:UF', nsNFE)
-        data_emi = root.find(caminho + 'ns:ide/ns:dhEmi', nsNFE)
-        data_objeto = datetime.fromisoformat(data_emi.text)
-        data_formatada = data_objeto.strftime("%d-%m-%Y %H:%M")
-        lista_alq_produto_nfc = []
-        for det in root.findall(caminho + 'ns:det', nsNFE):
-            alq_icms_nfc = det.find('ns:imposto/ns:ICMS/ns:ICMS20/ns:pICMS', nsNFE)
-            if alq_icms_nfc is not None:
-                lista_alq_produto_nfc.append(alq_icms_nfc.text)
-            else:
-                alq_icms_nfe = det.find('ns:imposto/ns:ICMS/ns:ICMS00/ns:pICMS', nsNFE)
-                if alq_icms_nfe is not None:
-                    lista_alq_produto_nfc.append(alq_icms_nfe.text)
-                else:
-                    # vTotTrib * 100 / vNf = Aliquota ICMS
-                    # total_tributos = det.find('ns:total/ns:ICMSTot/ns:vTotTrib', nsNFE)
-                    # alq_icms_nfe = (float(total_tributos.text) * 100) / float(valor_total.text)
-                    alq_icms_nfe = '0'
-                    lista_alq_produto_nfc.append(alq_icms_nfe)
-
-        chave_nfc = root.find('ns:infNFe', nsNFE)
-        if chave_nfc is None:
-            chave_nfc = root.find('ns:NFe/ns:infNFe', nsNFE).attrib['Id'][3:]
+        if cnpj_dest is not None:
+            infor['cnpj_cpf_dest'] = cnpj_dest
+            infor['dest_name'] = dest_name
         else:
-            chave_nfc = chave_nfc.attrib['Id'][3:]
+            infor['cnpj_cpf_dest'] = cpf_dest
+            infor['dest_name'] = dest_name
 
-        cnpj_emit_nfc_format = '{}.{}.{}/{}-{}'.format(cnpj_emit_nfc.text[:2], cnpj_emit_nfc.text[2:5],
-                                                       cnpj_emit_nfc.text[5:8], cnpj_emit_nfc.text[8:12],
-                                                       cnpj_emit_nfc.text[12:])
-        produtos = []
-
-        for det in root.findall(caminho + 'ns:det', nsNFE):
-            nome_prod_nfc = det.find('ns:prod/ns:xProd', nsNFE)
-            item_prod_nfc = det.find('ns:prod/ns:vUnCom', nsNFE)
-            item_prod_format = round(float(item_prod_nfc.text), 2)
-            codigo_prod_nfc = det.find('ns:prod/ns:cProd', nsNFE)
-            valor_prod_nfc = det.find('ns:prod/ns:vProd', nsNFE)
-            qtd_prod_nfc = det.find('ns:prod/ns:qCom', nsNFE)
-            qtd_prod_format = float(qtd_prod_nfc.text)
-            produto = {
-                'codigo': codigo_prod_nfc.text,
-                'nome': nome_prod_nfc.text,
-                'valor_unitario': item_prod_format,
-                'quantidade': qtd_prod_format,
-                'valor_total': valor_prod_nfc.text
-            }
-            produtos.append(produto)
-
-        valor_total = root.find(caminho + 'ns:total/ns:ICMSTot/ns:vNF', nsNFE)
-        recebimento = []
-        for pag in root.findall(caminho + 'ns:pag/ns:detPag', nsNFE):
-            pagamento = pag.find('ns:vPag', nsNFE)
-            recebimento.append(float(pagamento.text))
-        erro_pagamento = rules_recebimentos(recebimento, float(valor_total.text))
-        valor_tribut = root.find(caminho + 'ns:total/ns:ICMSTot/ns:vTotTrib', nsNFE)
-        alq_validado = validator_rules(emit_uf.text, emit_uf.text, modelo_nfe.text, float(valor_total.text),
-                                       lista_alq_produto_nfc, float(valor_tribut.text))
-        xml_sem_namespace = re.sub(b'ns0:', b'', xml)
-        xml_sem_namespace_format = xml_sem_namespace.decode('utf-8')
-
-        infor = {
-            'Serie': serie_nfc.text,
-            'Numero_da_Nota': numero_nfc.text,
-            'Emitente': emitente_nfc.text,
-            'CNPJ_Emitente': cnpj_emit_nfc_format,
-            'Chave_de_Acesso': chave_nfc,
-            'produtos': produtos,
-            'xml': xml_sem_namespace_format,
-            'modelo': modelo_nfe.text,
-            'alq_validado': alq_validado,
-            'erro_pagamento': erro_pagamento,
-            'data': data_formatada
-        }
         return infor
-    
-    
+    elif modelo_nfe.text == '55':
+        infor = {'Serie': serie.text,
+                 'Numero_da_Nota': numero.text,
+                 'Emitente': emitente.text,
+                 'CNPJ_Emitente': cnpj_emit_format,
+                 'Chave_de_Acesso': chave_acesso,
+                 'op': op,
+                 'infcpl': infcpl.text,
+                 'produtos': produtos,
+                 'xml': xml_sem_namespace_format,
+                 'modelo': modelo_nfe.text,
+                 'alq_validado': alq_validado,
+                 'erro_pagamento': erro_pagamento,
+                 'data': data_formatada,
+                 'cnpj_cpf_dest': cnpj_dest,
+                 'dest_name': dest_name
+                 }
+        return infor
+
+
 def validate_schema(file):
     try:
         file.seek(0)
         schema_path = '/schemas/'
         xml = ET.parse(file)
         xml_root = xml.getroot()
-        
+
         if xml_root.tag.__contains__('consReciNFe'):
             schema_path += 'consReciNFe_v4.00.xsd'
         elif xml_root.tag.__contains__('consSitNFe'):
@@ -321,13 +296,12 @@ def validate_schema(file):
             schema_path += 'retInutNFe_v4.00.xsd'
         elif xml_root.tag.__contains__('Signature'):
             schema_path += 'xmldsig-core-schema_v1.01.xsd'
-        
+
         xml_schema = ET.XMLSchema(file=SCRIPT_DIR + schema_path)
 
         # valid = xml_schema.validate(xml)
 
         # log = xml_schema.error_log
-
 
         xml_schema.assertValid(xml)
     except Exception as e:

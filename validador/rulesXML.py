@@ -218,7 +218,7 @@ def type_nota(file, caminho, modelo_nfe):
     if dest_uf is not None:
         if valor_tribut is not None:
             alq_validado = validator_rules_55(emit_uf.text, dest_uf.text,
-                                           lista_alq_produto, float(valor_tribut))
+                                           lista_alq_produto, float(valor_tribut.text))
         else:
             valor_tribut = 0
             alq_validado = validator_rules_55(emit_uf.text, dest_uf.text,

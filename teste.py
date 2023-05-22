@@ -54,7 +54,12 @@ file_teste = open('C:/Users/Dev/Andre/validador-xml-documentos-fiscais/nfe.xml',
 xml_teste = etree.parse(file_teste)
 file_teste.close()
 xml_teste_root = xml_teste.getroot()
+infor = {}
 for element in xml_teste_root.iter(tag=etree.Element):
     tag = element.tag[element.tag.find('}')+1:]
     if tag == 'mod':
         modelo = element.text
+        
+    
+
+    

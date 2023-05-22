@@ -324,6 +324,15 @@ def validate_schema(file):
         else:
             raise Exception('Schema não identificado. Verificar se o XML é referente a um documento fiscal')
         
+        for element in xml_root.iter(tag=ET.Element):
+            tag = element.tag[element.tag.find('}')+1:]
+            if tag == 'mod':
+                modelo = element.text
+            elif tag == 'serie':
+                serie = element.text
+            
+               
+        
         xml_schema = ET.XMLSchema(file=SCRIPT_DIR + schema_path)
 
         # valid = xml_schema.validate(xml)
@@ -343,4 +352,4 @@ def validate_schema(file):
         # print(error.type_name)
         # print('ERROR:'+error_domain+':'+error_type+':'+err_string)
     finally:
-        return xml, xml_root, e
+        return xml, xml_root, modelo

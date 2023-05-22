@@ -14,18 +14,19 @@ def index(request):
     if request.method == "POST":
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            # xml, xml_root, e = rules.validate_schema(request.FILES["file"])
-            file = ET.parse(request.FILES["file"])
-            root = file.getroot()
+            rules.validate_schema(request.FILES["file"])
+            # file = ET.parse(request.FILES["file"])
+            # root = file.getroot()
 
-            nsNFE = {
-                'ns': "http://www.portalfiscal.inf.br/nfe"
-            }
-            caminho = rules.best_way(file)
+            # nsNFE = {
+            #     'ns': "http://www.portalfiscal.inf.br/nfe"
+            # }
+            # caminho = rules.best_way(file)
 
-            modelo_nfe = root.find(caminho + 'ns:ide/ns:mod', nsNFE)
+            # modelo_nfe = root.find(caminho + 'ns:ide/ns:mod', nsNFE)
             # VALIDAÇÃO DO TIPO DE NOTA FISCAL
-            infor = rules.tipo_nota(file, caminho, modelo_nfe)
+            # infor = rules.tipo_nota(xml, modelo_nfe=modelo)
+            infor = {}
             infor['metodo'] = request.method
             infor['form'] = form
             return render(request, "validador/validadorxml.html", infor)

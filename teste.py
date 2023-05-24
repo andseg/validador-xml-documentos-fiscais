@@ -68,7 +68,3 @@ for element in xml_teste_root.iter(tag=etree.Element):
              infor[child_tag] = child_text
         
 print(infor)
-
-    
-
-    

@@ -322,18 +322,26 @@ def validate_schema(file):
         elif xml_root.tag.__contains__('Signature'):
             schema_path += 'xmldsig-core-schema_v1.01.xsd'
         else:
-            raise Exception('Schema não identificado. Verificar se o XML é referente a um documento fiscal')
+            raise ET.DocumentInvalid('Schema não identificado. Verificar se o XML é referente a um documento fiscal')
         
         xml_schema = ET.XMLSchema(file=SCRIPT_DIR + schema_path)
         xml_schema.assertValid(xml)
+        return ['Schema validado com sucesso!']
     
     except Exception as e:
-        print(type(e).__name__ + " - " + str(e))
+        errors = []
+        for error in e.error_log:
+            errors.append(prettify_error(error))
+        return errors
     
-    finally:
-        if e is None:
-            return 'Schema validado com sucesso!'
-        else:
-            return e
+    
+def prettify_error(error: ET._LogEntry):
+    error_message = error.message
+    line = str(error.line)
+    element = error_message[error_message.find('}')+1:]
+    element = element[:element.find("'")]
+    message = error_message[error_message.find(':',error_message.find('}')+1)+2:]
+    return 'Elemento: ' + element + '\nMensagem: ' + message + '\nLinha: ' + line
+    
         
     

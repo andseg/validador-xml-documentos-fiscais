@@ -9,14 +9,11 @@
         <link rel="stylesheet" href="{% static 'css/style_validador.css' %}">
 
         <script>
-            function xml_info(){
-                var xml = document.querySelector('.textInfo');
-                xml.innerHTML='' + '<pre>{{ xml }}</pre>'
-            }
+
 
             function error_info(){
                 var erro = document.querySelector('.textInfo');
-                erro.innerHTML='' + '<p> {{ erro_pagamento }} <br> {{ alq_validado }} </p>' + '</div>'
+                erro.innerHTML='' + '<p> {{ errors }} <br> {{ alq_validado }} </p>' + '</div>'
             }
 
             function product_info(){
@@ -44,7 +41,6 @@
             <input class="envio" type="submit" value="Enviar">
         </form>
             <div class="divButton">
-                <button onclick="xml_info()" class="buttonXml"> XML </button>
                 <button onclick="error_info()" class="buttonErro"> Erros </button>
                 <button onclick="product_info()" class="buttonProduct"> Produtos </button>
                 <button onclick="info_nf()" class="buttonInfo"> Geral </button>

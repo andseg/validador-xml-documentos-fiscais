@@ -14,8 +14,12 @@ def index(request):
     if request.method == "POST":
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            # xml, xml_root, e = rules.validate_schema(request.FILES["file"])
-            file = ET.parse(request.FILES["file"])
+            f = request.FILES["file"]
+            errors = []
+            for message in rules.validate_schema(f):
+                errors.append(message)
+            f.seek(0)
+            file = ET.parse(f)
             root = file.getroot()
 
             nsNFE = {
@@ -28,6 +32,7 @@ def index(request):
             infor = rules.type_nota(file, caminho, modelo_nfe)
             infor['metodo'] = request.method
             infor['form'] = form
+            infor['errors'] = errors
             return render(request, "validador/validadorxml.html", infor)
     else:
         form = UploadFileForm()

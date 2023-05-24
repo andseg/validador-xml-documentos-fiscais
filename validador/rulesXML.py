@@ -306,27 +306,29 @@ def validate_schema(file):
             schema_path += 'retInutNFe_v4.00.xsd'
         elif xml_root.tag.__contains__('Signature'):
             schema_path += 'xmldsig-core-schema_v1.01.xsd'
-
+        else:
+            raise ET.DocumentInvalid('Schema não identificado. Verificar se o XML é referente a um documento fiscal')
+        
         xml_schema = ET.XMLSchema(file=SCRIPT_DIR + schema_path)
-
-        # valid = xml_schema.validate(xml)
-
-        # log = xml_schema.error_log
-
         xml_schema.assertValid(xml)
+        return ['Schema validado com sucesso!']
+    
     except Exception as e:
-        print(type(e).__name__ + " - " + str(e))
-        # err_string = type(e).__name__ + " - " + str(e)
-        # log = xml_schema.error_log
-        # error = log.last_error
-        # error_domain = error.domain_name
-        # print(error.domain_name)
-        # error_type = error.type_name
-        # print(error.type_name)
-        # print('ERROR:'+error_domain+':'+error_type+':'+err_string)
-    finally:
-        return xml, xml_root, e
-
+        errors = []
+        for error in e.error_log:
+            errors.append(prettify_error(error))
+        return errors
+    
+    
+def prettify_error(error: ET._LogEntry):
+    error_message = error.message
+    line = str(error.line)
+    element = error_message[error_message.find('}')+1:]
+    element = element[:element.find("'")]
+    message = error_message[error_message.find(':',error_message.find('}')+1)+2:]
+    return 'Elemento: ' + element + '\nMensagem: ' + message + '\nLinha: ' + line
+    
+        
 
 def calc_fisco(root, caminho, nsNFE):
     produtos = []
@@ -357,9 +359,3 @@ def calc_fisco(root, caminho, nsNFE):
         base_tot = float(produto['valor_base']) + base_tot
         if float(produto['alq_icms'].text) == 0:
             valida_uf_emit = local_emit(root, caminho, nsNFE)
-
-
-
-
-
-

@@ -213,7 +213,8 @@ def type_nota(file, caminho, modelo_nfe):
 
     # Inicio de informações Fiscais
     op = operation_mov(file, caminho)
-    infcpl = inform_tributos(file, caminho)
+    infcpl = inform_tributos(file, caminho).text if inform_tributos(file, caminho) is not None else 0
+    
     valor_tribut = root.find(caminho + 'ns:total/ns:ICMSTot/ns:vTotTrib', nsNFE)
     if dest_uf is not None:
         if valor_tribut is not None:
@@ -235,7 +236,7 @@ def type_nota(file, caminho, modelo_nfe):
             'Chave_de_Acesso': chave_acesso,
             'CNPJ_Emitente': cnpj_emit_format,
             'op': op,
-            'infcpl': infcpl.text,
+            'infcpl': infcpl,
             'produtos': produtos,
             'xml': xml_sem_namespace_format,
             'modelo': modelo_nfe.text,
@@ -258,7 +259,7 @@ def type_nota(file, caminho, modelo_nfe):
                  'CNPJ_Emitente': cnpj_emit_format,
                  'Chave_de_Acesso': chave_acesso,
                  'op': op,
-                 'infcpl': infcpl.text,
+                 'infcpl': infcpl,
                  'produtos': produtos,
                  'xml': xml_sem_namespace_format,
                  'modelo': modelo_nfe.text,

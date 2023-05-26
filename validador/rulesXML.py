@@ -80,19 +80,23 @@ def inform_tributos(file, caminho):
     root = file.getroot()
     nsNFE = {'ns': "http://www.portalfiscal.inf.br/nfe"}
     infCpl = root.find(caminho + 'ns:infAdic/ns:infCpl', nsNFE)
+    if infCpl is None:
+        infCpl = ''
+    else:
+        infCpl = infCpl.text
     return infCpl
 
 
 def format_cnpj(cnpj):
-    cnpj_format = '{}.{}.{}/{}-{}'.format(cnpj.text[:2], cnpj.text[2:5],
-                                          cnpj.text[5:8], cnpj.text[8:12],
-                                          cnpj.text[12:])
+    cnpj_format = '{}.{}.{}/{}-{}'.format(cnpj[:2], cnpj[2:5],
+                                          cnpj[5:8], cnpj[8:12],
+                                          cnpj[12:])
     return cnpj_format
 
 
 def format_cpf(cpf):
-    cpf_format = '{}.{}.{}-{}'.format(cpf.text[:3], cpf.text[3:5],
-                                      cpf.text[5:8], cpf.text[11:])
+    cpf_format = '{}.{}.{}-{}'.format(cpf[:3],  cpf[3:6],
+                                      cpf[6:9], cpf[9:])
     return cpf_format
 
 
@@ -100,7 +104,7 @@ def cnpj_cpf(root, caminho, nsNFE):
     cnpj_dest = root.find(caminho + 'ns:dest/ns:CNPJ', nsNFE)
     if cnpj_dest is not None:
         dest_name = root.find(caminho + 'ns:dest/ns:xNome', nsNFE)
-        cnpj_dest_format = format_cnpj(cnpj_dest)
+        cnpj_dest_format = format_cnpj(cnpj_dest.text)
         cpf_dest_format = None
         return dest_name.text, cnpj_dest_format, cpf_dest_format
 
@@ -108,7 +112,7 @@ def cnpj_cpf(root, caminho, nsNFE):
         cpf_dest = root.find(caminho + 'ns:dest/ns:CPF', nsNFE)
         if cpf_dest is not None:
             dest_name = root.find(caminho + 'ns:dest/ns:xNome', nsNFE)
-            cpf_dest_format = format_cpf(cpf_dest)
+            cpf_dest_format = format_cpf(cpf_dest.text)
             cnpj_dest_format = None
             return dest_name.text, cnpj_dest_format, cpf_dest_format
         else:
@@ -137,7 +141,17 @@ def type_nota(file, caminho, modelo_nfe):
     serie = root.find(caminho + 'ns:ide/ns:serie', nsNFE)
     numero = root.find(caminho + 'ns:ide/ns:nNF', nsNFE)
     emitente = root.find(caminho + 'ns:emit/ns:xNome', nsNFE)
+    if emitente is None:
+        emitente = ''
+    else:
+        emitente = emitente.text
+    
     cnpj_emit = root.find(caminho + 'ns:emit/ns:CNPJ', nsNFE)
+    if cnpj_emit is None:
+        cnpj_emit = ''
+    else:
+        cnpj_emit = cnpj_emit.text
+    
     cnpj_emit_format = format_cnpj(cnpj_emit)
 
     # Encontrando Estado do Emitente
@@ -213,9 +227,10 @@ def type_nota(file, caminho, modelo_nfe):
 
     # Inicio de informações Fiscais
     op = operation_mov(file, caminho)
-    infcpl = inform_tributos(file, caminho).text if inform_tributos(file, caminho) is not None else 0
+    infcpl = inform_tributos(file, caminho)
     
     valor_tribut = root.find(caminho + 'ns:total/ns:ICMSTot/ns:vTotTrib', nsNFE)
+    
     if dest_uf is not None:
         if valor_tribut is not None:
             alq_validado = validator_rules_55(emit_uf.text, dest_uf.text,
@@ -232,7 +247,7 @@ def type_nota(file, caminho, modelo_nfe):
         infor = {
             'Serie': serie.text,
             'Numero_da_Nota': numero.text,
-            'Emitente': emitente.text,
+            'Emitente': emitente,
             'Chave_de_Acesso': chave_acesso,
             'CNPJ_Emitente': cnpj_emit_format,
             'op': op,
@@ -246,29 +261,38 @@ def type_nota(file, caminho, modelo_nfe):
         }
         if cnpj_dest is not None:
             infor['cnpj_cpf_dest'] = cnpj_dest
+            infor['cnpj_cpf_dest_len'] = len(cnpj_dest)
+        else:
+            infor['cnpj_cpf_dest'] = cpf_dest
+            infor['cnpj_cpf_dest_len'] = len(cpf_dest)
+        
+        
+        infor['dest_name'] = dest_name
+        return infor
+    elif modelo_nfe.text == '55':
+        infor = {
+            'Serie': serie.text,
+            'Numero_da_Nota': numero.text,
+            'Emitente': emitente,
+            'CNPJ_Emitente': cnpj_emit_format,
+            'Chave_de_Acesso': chave_acesso,
+            'op': op,
+            'infcpl': infcpl,
+            'produtos': produtos,
+            'xml': xml_sem_namespace_format,
+            'modelo': modelo_nfe.text,
+            'alq_validado': alq_validado,
+            'erro_pagamento': erro_pagamento,
+            'data': data_formatada,
+            'cnpj_cpf_dest': cnpj_dest,
+            'dest_name': dest_name
+        }
+        if cnpj_dest is not None:
+            infor['cnpj_cpf_dest'] = cnpj_dest
             infor['dest_name'] = dest_name
         else:
             infor['cnpj_cpf_dest'] = cpf_dest
             infor['dest_name'] = dest_name
-
-        return infor
-    elif modelo_nfe.text == '55':
-        infor = {'Serie': serie.text,
-                 'Numero_da_Nota': numero.text,
-                 'Emitente': emitente.text,
-                 'CNPJ_Emitente': cnpj_emit_format,
-                 'Chave_de_Acesso': chave_acesso,
-                 'op': op,
-                 'infcpl': infcpl,
-                 'produtos': produtos,
-                 'xml': xml_sem_namespace_format,
-                 'modelo': modelo_nfe.text,
-                 'alq_validado': alq_validado,
-                 'erro_pagamento': erro_pagamento,
-                 'data': data_formatada,
-                 'cnpj_cpf_dest': cnpj_dest,
-                 'dest_name': dest_name
-                 }
         return infor
 
 

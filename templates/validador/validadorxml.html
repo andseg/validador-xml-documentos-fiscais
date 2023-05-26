@@ -57,7 +57,11 @@
                     <p> <strong> Chave de Acesso da Nota: </strong> {{ Chave_de_Acesso }} </p>
                     <p> <strong> Número da Nota:</strong> {{ Numero_da_Nota }} <strong>Série:</strong> {{ Serie }} <strong>Modelo:</strong> {{ modelo }}</p>
                     <p> <strong> Emitente: </strong> {{ Emitente }} </p>
-                    <p> <strong> CNPJ do Emitente: </strong> {{ CNPJ_Emitente }} </p>
+                    {% if cnpj_cpf_dest_len > 14 %}
+                    <p> <strong> CNPJ do Emitente: </strong> {{ cnpj_cpf_dest }} </p>
+                    {% else %}
+                    <p> <strong> CPF do Emitente: </strong> {{ cnpj_cpf_dest }} </p>
+                    {% endif %}
                     <br>
                 </div>
             </div>

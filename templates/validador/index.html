@@ -16,13 +16,13 @@
                     <h1>VALIDADOR XML</h1>
                 </div>
             </div>
-            <div class="conteiner_button">
-                <form method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data">
+                <div class="configup">
                     {% csrf_token %}
-                    {{ form }}
-                    <input type="submit" value="Enviar">
-                </form>
-            </div>
+                    {{ form.file.label_tag }} {{ form.file }}
+                </div>
+                <input class="buttonEnvio" type="submit" value="Enviar">
+            </form>
             <div class="coneteiner_nav">
                     <nav>
                         <ul class="nav_bar">

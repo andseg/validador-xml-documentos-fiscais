@@ -236,3 +236,18 @@ input[type="file" ]{
     width: 150px;
     height: 150px;
 }
+
+.configup{
+    background: #ffefef;
+    border-radius: 5%;
+    width: 25vw;
+    margin-top: 35vw;
+    margin-left: -45vw;
+    text-align: center;
+}
+
+.buttonEnvio {
+    width: 5vw;
+    margin-left: -45vw;
+    margin-top: 1vw;
+}

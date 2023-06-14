@@ -2,6 +2,8 @@
 
 Este é um projeto que consiste em um validador de arquivos XML para documentos fiscais, em desenvolvimento por [andseg](https://github.com/andseg), [FelpsFranco](https://github.com/FelpsFranco) e [Davii-code](https://github.com/Davii-code). O validador é específico para notas fiscais eletrônicas (NF-e).
 
+O projeto está em desenvolvimento, logo, muitas funcionalidades não foram implementadas ou são alteradas frequentemente.
+
 ## Funcionalidades
 
 - Validação de arquivos XML de notas fiscais NF-e;

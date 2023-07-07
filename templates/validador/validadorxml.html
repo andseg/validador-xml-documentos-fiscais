@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Validador</title>
         <link rel="stylesheet" href="{% static 'css/style_validador.css' %}">
+        <link rel="icon" type="image/png" href="{% static 'image/xml.png' %}"/>
 
         <script>
             function error_info(){
@@ -31,42 +32,63 @@
                     '<p> <strong> Tributos: </strong> {{ infcpl }} </p>'
             }
 
+            function info(){
+                var info = document.querySelector('.textInfo');
+                info.innerHTML='' + ' <div>'+
+               ' <div>'+
+                 '<br>'+
+                    '<p> <strong> Chave de Acesso da Nota: </strong> {{ Chave_de_Acesso }} </p>'+
+                   ' <p> <strong> Número da Nota:</strong> {{ Numero_da_Nota }} <strong>Série:</strong> {{ Serie }} <strong>Modelo:</strong> {{ modelo }}</p>'+
+                   ' <p> <strong> Emitente: </strong> {{ Emitente }} </p>'+
+                   ' <p> <strong> CNPJ do Emitente: </strong> {{ CNPJ_Emitente }} </p>'+
+                    '<p> <strong> Destinatário: </strong> {{ dest_name }} </p>'+
+                   ' {% if cnpj_cpf_dest_len > 14 %}'
+                  '  <p> <strong> CNPJ do Destinatário: </strong> {{ cnpj_cpf_dest }} </p>'+
+                   ' {% else %}'+
+                  '  <p> <strong> CPF do Destinatário: </strong> {{ cnpj_cpf_dest }} </p>'+
+                  '  {% endif %}'+
+                   ' <br>'+
+              '  </div>'+
+        ' </div>'
+            }
+            function xml(){
+                var info = document.querySelector('.textInfo');
+                info.innerHTML='' + ' <pre>{{ xml }}</pre> '
+            }
+            
         </script>
     </head>
     <body>
         <p class="tittle"> VALIDADOR DE XMLs</p>
-        <form method="post" enctype="multipart/form-data">
+<div class="conteiner_P">
+   
+    <form class="conteiner_form" method="post" enctype="multipart/form-data">
+        <div>
             {% csrf_token %}
-            {{ form }}
-            <input class="envio" type="submit" value="Enviar">
-        </form>
-            <div class="divButton">
-                <button onclick="error_info()" class="buttonErro"> Erros </button>
-                <button onclick="product_info()" class="buttonProduct"> Produtos </button>
-                <button onclick="info_nf()" class="buttonInfo"> Geral </button>
-            </div>
+                <label for="id_file" class="button" id="envir_arquivo" >Selecione um arquivo XML</label>
+                <input type="file" name="file" required id="id_file">
+                <input class="button_enviar" type="submit" value="Enviar arquivo"></input>
+                
+        </div>
+    </form>
+</div>   
+
+    <div class="divButton">
+        <button class="button-7" role="button" onclick="error_info()" > Erros </button>
+        <button class="button-7" role="button" onclick="product_info()" > Produtos </button>
+        <button class="button-7" role="button" onclick="info_nf()" > Geral </button>
+        <button class="button-7" role="button" onclick="info()">Informações</button>
+        <button class="button-7" role="button" onclick="xml()">XML</button>
+    </div>
+<div class="xml">
         {% if metodo == 'POST' %}
             <div class="mostraXML" id="xml">
                 <div class="textInfo">
                     <pre>{{ xml }}</pre>
                 </div>
             </div>
-            <div class="infoEmit">
-                <div class="infoEmiteStyle">
-                    <br>
-                    <p> <strong> Chave de Acesso da Nota: </strong> {{ Chave_de_Acesso }} </p>
-                    <p> <strong> Número da Nota:</strong> {{ Numero_da_Nota }} <strong>Série:</strong> {{ Serie }} <strong>Modelo:</strong> {{ modelo }}</p>
-                    <p> <strong> Emitente: </strong> {{ Emitente }} </p>
-                    <p> <strong> CNPJ do Emitente: </strong> {{ CNPJ_Emitente }} </p>
-                    <p> <strong> Destinatário: </strong> {{ dest_name }} </p>
-                    {% if cnpj_cpf_dest_len > 14 %}
-                    <p> <strong> CNPJ do Destinatário: </strong> {{ cnpj_cpf_dest }} </p>
-                    {% else %}
-                    <p> <strong> CPF do Destinatário: </strong> {{ cnpj_cpf_dest }} </p>
-                    {% endif %}
-                    <br>
-                </div>
-            </div>
         {% endif %}
+</div>
+
     </body>
 </html>

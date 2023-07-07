@@ -1,134 +1,87 @@
-body{
-    background: #292E43;
-    border: solid 1px;
-    box-shadow: 0px 0px 2px 2px rgb(74, 34, 34);
-    border-radius: 6px;
-    font-family: 'Lobster', cursive;
-    font-family: 'Roboto', sans-serif;
-}
-
-
-.infoEmit {
-    margin-top: 3vw;
-    display: flex;  
+body {
+    background-image: url(/static/image/capa.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
     justify-content: center;
-    align-items: center;  
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+
 }
 
-.infoEmiteStyle{
-    padding: 7px;
+.conteiner_Principal {
     text-align: center;
-    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 530px;
+    height: 270px;
+    border: solid #000000 5px;
     border-radius: 15px;
-    background: #292E43;
 
 }
-.infoEmiteStyle th{
-    background: #292E43;
-}
-.infoEmiteStyle td {
-    padding-right: 15px;
-    padding-bottom: 10px;
-    padding-left: 15px;
+
+.conteiner_interno{
     text-align: center;
-    background: #292E43;
-
+    width: 500px;
+    height: 250px;
+    background: rgb(76, 96, 230,0.6);
+    border-radius: 15px;
 }
-
-.infoDest {
-    margin-top: 0.5vw;
-    background: #e8e8e8;
-    border-radius: 2vw;
-    width: 55vw;
-    height: 100%;
-    display: none;
-}
-
-.inforDestStyle {
-    font-size: 14px;
-    margin-left: 2vw;
-}
-
-.mostraXML {
-    background: #dddddd;
-    height: 20vw;
-    overflow-y: scroll;
-    overflow-x: auto;
-    width: 55vw;
-    margin-top: 2vw;
-    display: none;
-}
-
-{% if modelo == '55' %}
-.produtos {
-    margin-top: -43vw;
-    background: #e8e8e8;
-    border-radius: 2vw;
-    width: 40vw;
-    height: 42.5vw;
-    margin-left: 57.5vw;
-    overflow-y: auto;
-    overflow-x: auto;
-    display: none;
-}
-{% endif %}
-
-{% if modelo == '65' %}
-.produtos {
-    margin-top: -35.5vw;
-    background: #e8e8e8;
-    border-radius: 2vw;
-    width: 40vw;
-    height: 42.5vw;
-    margin-left: 57.5vw;
-    overflow-y: auto;
-    overflow-x: auto;
-}
-{% endif %}
-
-.produtoStyle {
-    font-size: 14px;
-    margin-left: 2vw;
+.tittle_XML{
+    font-size: large;
+    font-family: 'Roboto Slab', serif;
+    margin-bottom: 80px;
 }
 
 input[type="file" ]{
-  display: none;
+    display: none;
+  
 }
 
-/*CSS Davi*/
-
-.conteiner_Principal{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 97vh;
-    width: 90vw;
-    margin-left: 30px;
-    
-}
-
-.troca{
-    background: #292E43;
-}
-
-.tittle_XML{
-    background: #292E43;
-}
-
-.tittle_XML h1{
-    color: #fff;
-    background: #292E43;
-}
 
 .button {
-    background: #292E43;
-    padding: 20px;
     margin-bottom: 30px;
-    cursor: pointer;
-    color:#fff;
     margin-right: 15px;
-    border: solid black 1px;
-    
+    border-radius: 3px;
+    background-color: #09a848;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.15385;
+    margin: 0;
+    outline: none;
+    padding: 15px .8em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    white-space: nowrap;
+    margin-right: 7px;
+}
+.button:hover,
+.button:focus {
+  background-color: rgb(70, 186, 76);
+}
+
+.button:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+}
+
+.button:active {
+  background-color: #09a848;
+  box-shadow: none;
 }
 
 .button a {
@@ -137,117 +90,46 @@ input[type="file" ]{
 }
 
 .button_enviar{
-    margin-top: 9px;
-    padding: 13px;
-    background: #2c3869;
-    border: #e8e8e8;
-    cursor: pointer;
-    color:#fff;
-    box-shadow: 0px 0px 2px 2px rgb(0,0,0);
+    background-color: #09a848;
+    border: 1px solid transparent;
     border-radius: 3px;
+    box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.15385;
+    margin: 0;
+    outline: none;
+    padding: 15px .8em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    white-space: nowrap;
+    margin-right: 20px;
+    
 }
 
-.conteiner_button{
-    position:fixed;
-    left:50px;
-    bottom:50px;
-    background: #292E43;
+.button_enviar:hover,
+.button_enviar:focus {
+  background-color: rgb(70, 186, 76);
+}
+
+.button_enviar:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+}
+
+.button_enviar:active {
+  background-color: #09a848;
+  box-shadow: none;
 }
 
 
-.conteiner_menu{
-    display: none;
-    justify-content: center;
-    align-items: center;
   
-}
-
-.nav_menu{
-    margin-top: 30px;
-    text-align: center;
-    background: rgb(111, 175, 232);
-    border-radius: 15px;
-    
-}
-
-.nav_menu ul{
-    list-style: none;
-    display: flex;
-
-}
-
-.li_menu{
-     margin-left: 10px;
-    list-style-type: none;
-    margin-right: 10px;
-    
-}
-
-.li_menu a{
-    text-decoration: none;
-    color: #fff;
-}
-
-/*menu capa inicial */
-
-.nav_bar{
-    list-style: none;
-    background: #292E43;
-    display:flex;
-
-
-}
-
-.coneteiner_nav{
-    position:fixed;
-    right:50px;
-    top:15px;
-    background: #292E43;
-}
-.nav_li{
-    background: #292E43;
-    padding: 10px;
-
-}
-.nav_li a{
-    text-decoration: none;
-    background: #292E43;
-    color: #fff;
-}
-
-/*bordas*/
-
-.borda_direita{
-    position:fixed;
-    left:50px;
-    top:50px;
-    border-top: solid rgb(88, 6, 6) 1px;
-    border-left:solid rgb(88, 6, 6) 1px ;
-    width: 150px;
-    height: 150px;
-}
-
-.borda_esquerda{
-    position:fixed;
-    right:50px;
-    bottom:50px;
-    border-bottom: solid rgb(88, 6, 6) 1px;
-    border-right:solid rgb(88, 6, 6) 1px ;
-    width: 150px;
-    height: 150px;
-}
-
-.configup{
-    background: #ffefef;
-    border-radius: 5%;
-    width: 25vw;
-    margin-top: 35vw;
-    margin-left: -45vw;
-    text-align: center;
-}
-
-.buttonEnvio {
-    width: 5vw;
-    margin-left: -45vw;
-    margin-top: 1vw;
-}

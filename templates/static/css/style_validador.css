@@ -1,125 +1,196 @@
 body {
-    background: moccasin;
+    background-image: url(/static/image/papelada.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .tittle {
-    color: indigo;
     text-align: center;
-    font-size: 24px;
-}
-
-.envio {
-    background: ivory;
-    border-radius: 15%;
-    width: 68px;
+    font-size: 50px;
+    color: #fff;
 }
 
 .divButton {
-    margin-top: 2vw;
-    background: cadetblue;
-    width: 35vw;
-    border-top-right-radius: 1vw;
-}
-
-.buttonXml {
-    width: 5vw;
-    height: 2vw;
-    margin-left: 1vw;
-    border-radius: 0.5vw;
-}
-
-.buttonErro {
-    width: 5vw;
-    height: 2vw;
-    border-radius: 0.5vw;
-    margin-left: 1vw;
-}
-
-.buttonProduct {
-    width: 5vw;
-    height: 2vw;
-    border-radius: 0.5vw;
-    margin-left: 1vw;
-}
-
-.buttonInfo{
-    width: 5vw;
-    height: 2vw;
-    border-radius: 0.5vw;
-    margin-left: 1vw;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    margin-right: 740px;
 }
 
 .mostraXML {
-    background: ivory;
     height: 20vw;
     overflow-y: scroll;
     overflow-x: auto;
-    width: 100%;
-    border-style: double;
+    width: 60%;
+    margin-top: 0;
+    border: double;
+    background: rgba(6, 6, 7, 0.6,);
+    backdrop-filter: blur(10px);
+    
+    
+}
+.xml{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .textInfo {
     margin-left: 1vw;
+    color: #fff;
+    font-size: 15px;
 }
 
-.infoEmit {
-    margin-top: 1vw;
-    background: ivory;
-    border-radius: 1vw;
-    width: 100%;
-    height: 100%;
+.conteiner_P{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.infoEmiteStyle {
-    font-size: 14px;
-    margin-left: 2vw;
+.btn{
+    margin-right: 50px;
+    padding: 10px;
+
+}
+
+.button-7 {
+  background-color: #09a848;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.15385;
+  margin: 0;
+  outline: none;
+  padding: 8px .8em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+    margin-right: 5px;
+}
+
+.button-7:hover,
+.button-7:focus {
+  background-color: rgb(70, 186, 76);
+}
+
+.button-7:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+}
+
+.button-7:active {
+  background-color: #09a848;
+  box-shadow: none;
+}
+
+/*Butões de selecionar XML*/
+
+input[type="file" ]{
+    display: none;
+  
 }
 
 
-
-
-
-.infoDest {
-    margin-top: 0.5vw;
-    background: #e8e8e8;
-    border-radius: 2vw;
-    width: 55vw;
-    height: 100%;
+.button {
+    padding: 25px;
+    margin-bottom: 30px;
+    margin-right: 15px;
+    border-radius: 3px;
+    background-color: #09a848;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.15385;
+    margin: 0;
+    outline: none;
+    padding: 15px .8em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    white-space: nowrap;
+    margin-right: 20px;
+}
+.button:hover,
+.button:focus {
+  background-color: rgb(70, 186, 76);
 }
 
-.inforDestStyle {
-    font-size: 14px;
-    margin-left: 2vw;
+.button:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
 }
 
-
-{% if modelo == '55' %}
-.produtos {
-    margin-top: -43vw;
-    background: #e8e8e8;
-    border-radius: 2vw;
-    width: 40vw;
-    height: 38.5vw;
-    margin-left: 57.5vw;
-    overflow-y: auto;
-    overflow-x: auto;
+.button:active {
+  background-color: #09a848;
+  box-shadow: none;
 }
-{% endif %}
 
-{% if modelo == '65' %}
-.produtos {
-    margin-top: -35.5vw;
-    background: #e8e8e8;
-    border-radius: 2vw;
-    width: 40vw;
-    height: 38.5vw;
-    margin-left: 57.5vw;
-    overflow-y: auto;
-    overflow-x: auto;
+.button a {
+    text-decoration: none;
+    color: #fff;
 }
-{% endif %}
 
-.produtoStyle {
-    font-size: 14px;
-    margin-left: 2vw;
+.button_enviar{
+    padding: 13px;
+    background-color: #09a848;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.15385;
+    margin: 0;
+    outline: none;
+    padding: 15px .8em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    white-space: nowrap;
+    margin-right: 20px;
+}
+
+.button_enviar:hover,
+.button_enviar:focus {
+  background-color: rgb(70, 186, 76);
+}
+
+.button_enviar:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+}
+
+.button_enviar:active {
+  background-color: #09a848;
+  box-shadow: none;
 }
